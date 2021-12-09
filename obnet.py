@@ -63,7 +63,7 @@ def fetchJSON(unixPath):
         bData=sock.recv(4096)
         sock.close()
 
-        jsonString=bData.decode()
-        json=json.loads(jsonString)
+        strData=bData.decode()
+        jsonData=json.loads(strData)
     except:
         return None
