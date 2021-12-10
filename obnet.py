@@ -14,7 +14,7 @@ from os.path import join as path_join
 from socket import AddressFamily, SocketKind, socket
 from threading import Lock
 
-from flask import Flask, abort, render_template
+from flask import Flask, abort, render_template, Response
 from flask.helpers import send_file
 
 # Setup the flask instance
@@ -27,21 +27,16 @@ NET_INFO = {
     "networkLogo": "open_bnet_banner.png",
 }
 
-# Last server fetch
-SERVERS = []
-CHANNELS = []
-
 # Socket for unrealircd
-SOCK = None
 UNREAL_SOCKET_PATH = "/tmp/openbnet.sock"
 
 
 class FetchJSON:
-    def __init__(self, unix_path):
+    def __init__(self, unix_path, expires_after=60):
         self.unix_path = unix_path
         self.json_data = None
-        self.last_update = 0
-        self.expires_after = 60
+        self.expires_after = expires_after
+        self.last_update = -self.expires_after - 1
         self.lock = Lock()
 
     def get(self):
@@ -80,18 +75,12 @@ FETCH_JSON = FetchJSON(None)
 
 @app.route("/", methods=["GET"])
 def home():
-    global NET_INFO
-    global SERVERS
-
     # Fetch the information form unrealircd socket
     json_data = FETCH_JSON.get()
 
     # Grab servers
-    if json_data is not None:
-        SERVERS = json_data["serv"]
-    else:
-        "TODO: This actually doesn't work, mmm"
-        abort(Exception("Error whilst contacting the IRC daemon"))
+    if json_data is None:
+        abort(Response(response="Error whilst contacting the IRC daemon", status=404))
 
     # Grab general info
     network_state = {}
@@ -100,25 +89,24 @@ def home():
     network_state["operators"] = json_data["operators"]
     network_state["messages"] = json_data["messages"]
 
-    return render_template("index.html", **NET_INFO, servers=SERVERS, **network_state)
+    return render_template(
+        "index.html", **NET_INFO, servers=json_data["serv"], **network_state
+    )
 
 
 @app.route("/channels", methods=["GET"])
-def channelsDierciory():
+def channels_direciory():
     global NET_INFO
-    global CHANNELS
 
     # Fetch the information form unrealircd socket
     json_data = FETCH_JSON.get()
 
     # Grab servers
-    if json_data is not None:
-        CHANNELS = json_data["chan"]
-    else:
-        "TODO: This actually doesn't work, mmm"
-        abort(Exception("Error whilst contacting the IRC daemon"))
+    if json_data is None:
+        abort(Response(response="Error whilst contacting the IRC daemon", status=404))
 
-    return render_template("channels.html", **NET_INFO, channels=CHANNELS)
+    return render_template("channels.html", **NET_INFO, channels=json_data["chan"])
+
 
 @app.route("/raw", methods=["GET"])
 def raw():
@@ -128,6 +116,8 @@ def raw():
 
 @app.route("/assets/<file>", methods=["GET"])
 def assets(file):
+    file = file.replace("..", "")
+    file = file.replace("/", "")
     return send_file(path_join("assets", file))
 
 
