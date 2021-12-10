@@ -6,12 +6,14 @@ OpenBNET
 A simple web service that provides insight into the BonoboNET network
 """
 
-import sys
 import json
+import sys
+import time
 from os import environ as env
 from socket import AddressFamily, SocketKind, socket
+from threading import Lock
 
-from flask import Flask, render_template, abort
+from flask import Flask, abort, render_template
 from flask.helpers import send_file
 
 # Setup the flask instance
@@ -32,30 +34,42 @@ SOCK = None
 UNREAL_SOCKET_PATH = "/tmp/openbnet.sock"
 
 
-def fetch_json(unix_path):
-    """
-    "Fetches the JSON from the server
+class FetchJSON:
+    def __init__(self, unix_path):
+        self.unix_path = unix_path
+        self.json_data = None
+        self.last_update = 0
+        self.expires_after = 60
+        self.lock = Lock()
 
-    Args:
-        unix_path (str): The path to the socket
+    def get(self):
+        if self.unix_path is None:
+            return None
 
-    Returns:
-        dict or None: The JSON data or None if the socket is not available
-    """
-    try:
-        # Assuming it is never bigger than a certain size
-        sock = socket(AddressFamily.AF_UNIX, SocketKind.SOCK_STREAM)
-        sock.connect(unix_path)
-        bytes_recv = sock.recv(4096)
-        sock.close()
+        with self.lock:
+            if time.time() - self.last_update > self.expires_after:
+                return self.json_data
 
-        str_data = bytes_recv.decode()
-        json_data = json.loads(str_data)
+            try:
+                # Assuming it is never bigger than a certain size
+                sock = socket(AddressFamily.AF_UNIX, SocketKind.SOCK_STREAM)
+                sock.connect(self.unix_path)
+                bytes_recv = sock.recv(4096)
+                sock.close()
 
-        return json_data
-    except Exception as exception:
-        print(exception)
-        return None
+                str_data = bytes_recv.decode()
+                json_data = json.loads(str_data)
+
+                self.json_data = json_data
+                self.last_update = time.time()
+
+                return json_data
+            except Exception as exception:
+                print(exception)
+                return None
+
+
+FETCH_JSON = FetchJSON(None)
 
 
 @app.route("/", methods=["GET"])
@@ -64,7 +78,7 @@ def home():
     global SERVERS
 
     # Fetch the information form unrealircd socket
-    json_data = fetch_json(UNREAL_SOCKET_PATH)
+    json_data = FETCH_JSON.get()
 
     # Grab servers
     if json_data is not None:
@@ -84,7 +98,7 @@ def home():
 
 @app.route("/raw", methods=["GET"])
 def raw():
-    raw_data = fetch_json(UNREAL_SOCKET_PATH)
+    raw_data = FETCH_JSON.get()
     return render_template("raw.html", raw=raw_data, **NET_INFO)
 
 
@@ -95,7 +109,7 @@ def assets(file):
 
 @app.route("/api", methods=["GET"])
 def api():
-    data = fetch_json(UNREAL_SOCKET_PATH)
+    data = FETCH_JSON.get()
     return data
 
 
@@ -129,7 +143,9 @@ def init():
 
     try:
         global UNREAL_SOCKET_PATH
+        global FETCH_JSON
         UNREAL_SOCKET_PATH = str(env["UNREAL_SOCKET_PATH"])
+        FETCH_JSON = FetchJSON(UNREAL_SOCKET_PATH)
     except KeyError:
         pass
 
