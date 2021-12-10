@@ -31,14 +31,15 @@ servers=[]
 
 "Socket for unrealircd"
 sock=None
+unrealSocketPath="/tmp/openbnet.sock"
 
 @app.route("/", methods=["GET"])
 def home():
     global netInfo
     global servers
 
-    "TODO: Fetch new servers here"
-    jsonData=fetchJSON("/tmp/openbnet.sock")
+    "Fetch the information form unrealircd socket"
+    jsonData=fetchJSON(unrealSocketPath)
 
     "TODO: Handle None returned on error"
 
@@ -91,6 +92,8 @@ def init():
     "TODO: Please add support here to set the bind host and port"
     bindAddr="::"
     bindPort=8081
+
+    "TODO: Add env support for setting `unrealSocketPath`"
 
     try:
         "Start flask"
