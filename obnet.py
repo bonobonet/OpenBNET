@@ -70,6 +70,7 @@ def home():
     if json_data is not None:
         SERVERS = json_data["serv"]
     else:
+        "TODO: This actually doesn't work, mmm"
         abort(Exception("Error whilst contacting the IRC daemon"))
 
     # Grab general info
