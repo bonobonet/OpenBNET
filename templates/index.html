@@ -17,6 +17,16 @@
             <p><i>A complete list of all currently active linked servers is below</i></p>
             <br>
 
+            <table>
+                <tr>
+                    <th>Server</th>
+                    <th>Users online</th>
+                </tr>
+                <tr>
+                    <td>{{ server['name'] }}</td>
+                    <td>{{ server['users'] }}</td>
+                </tr>
+            </table>
             {% for server in servers %}
                 <p>{{ server['name'] }} (Users: {{ server['users'] }})</p>
             {% endfor %}
