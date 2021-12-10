@@ -47,7 +47,7 @@ class FetchJSON:
             return None
 
         with self.lock:
-            if time.time() - self.last_update > self.expires_after:
+            if time.time() - self.last_update < self.expires_after:
                 return self.json_data
 
             try:
@@ -66,6 +66,10 @@ class FetchJSON:
                 return json_data
             except Exception as exception:
                 print(exception)
+
+                self.json_data = None
+                self.last_update = time.time()
+
                 return None
 
 
@@ -144,11 +148,12 @@ def init():
 
     try:
         global UNREAL_SOCKET_PATH
-        global FETCH_JSON
         UNREAL_SOCKET_PATH = str(env["UNREAL_SOCKET_PATH"])
-        FETCH_JSON = FetchJSON(UNREAL_SOCKET_PATH)
     except KeyError:
         pass
+
+    global FETCH_JSON
+    FETCH_JSON = FetchJSON(UNREAL_SOCKET_PATH)
 
     try:
         # Start flask
