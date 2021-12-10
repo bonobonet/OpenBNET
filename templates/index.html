@@ -9,15 +9,28 @@
         <p>{{ description }}</p>
 
         <hr>
+        <p><a href="/">Home</a> | <a href="/channels">Channel directory</a> | <a href="/raw">Raw data</a></p>
+        <hr>
 
         <div>
             <h2>Servers</h2>
             <p><i>A complete list of all currently active linked servers is below</i></p>
             <br>
-            
+
             {% for server in servers %}
-                <p>{{ server }}</p>
+                <p>{{ server['name'] }} (Users: {{ server['users'] }})</p>
             {% endfor %}
+
+            <br>
+
+            <h2>Network state</h2>
+            <p><i>Some information regarding the global state of the network</i></p>
+            <br>
+
+            <p><b>Total messages:</b> {{ messages }} </p>
+            <p><b>Operators:</b> {{ operators }} </p>
+            <p><b>Clients:</b> {{ clients }} </p>
+            <p><b>Channels:</b> {{ channels }} </p>
         </div>
     </center>
 

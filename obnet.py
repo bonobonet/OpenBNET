@@ -4,12 +4,11 @@ OpenBNET
 A simple web service that provides insight into the BonoboNET network
 """
 
-from json.encoder import JSONEncoder
-from json.decoder import JSONDecoder
+import json
 from typing import Protocol
 from flask import Flask, render_template
 from flask.helpers import send_file
-from socket import AddressFamily, SocketKind, socket
+from socket import AddressFamily, SocketKind, socket, IPPROTO_NONE
 
 "Setup the flask instance"
 app=Flask(__name__)
@@ -37,20 +36,43 @@ def home():
     global servers
 
     "TODO: Fetch new servers here"
-    servers=fetchServers()
+    jsonData=fetchJSON("/tmp/openbnet.sock")
 
-    return render_template("index.html", **netInfo, servers=servers)
+    "TODO: Handle None returned on error"
+
+    "Grab servers"
+    servers=jsonData["serv"]
+
+    "Grab general info"
+    networkState = {}
+    networkState["channels"] = jsonData["channels"]
+    networkState["clients"] = jsonData["clients"]
+    networkState["operators"] = jsonData["operators"]
+    networkState["messages"] = jsonData["messages"]
+
+    return render_template("index.html", **netInfo, servers=servers, **networkState)
+
+@app.route("/raw", methods=["GET"])
+def raw():
+    raw=fetchJSON("/tmp/openbnet.sock")
+    return render_template("raw.html", raw=raw)
 
 @app.route("/assets/<file>", methods=["GET"])
 def assets(file):
     return send_file(file)
+
+@app.route("/api", methods=["GET"])
+def api():
+    data=fetchJSON("/tmp/openbnet.sock")
+    return data
 
 "Returns a list of servers"
 def fetchServers():
     servers=["lockdown.bnet", "reddawn648.bnet", "sparrow.bnet"]
 
 
-    fetchJSON("1")
+    data=fetchJSON("/tmp/openbnet.sock")
+
 
     return servers
 
@@ -58,12 +80,30 @@ def fetchServers():
 def fetchJSON(unixPath):
     try:
         "Assuming it is never bigger than a certain size"
-        sock=socket(AddressFamily.AF_UNIX, SocketKind.SOCK_RAW)
+        sock=socket(AddressFamily.AF_UNIX, SocketKind.SOCK_STREAM)
         sock.connect(unixPath)
         bData=sock.recv(4096)
         sock.close()
 
         strData=bData.decode()
         jsonData=json.loads(strData)
-    except:
+
+        return jsonData
+    except Exception as e:
+        print(e)
         return None
+
+def init():
+    "TODO: Please add support here to get environment variables to fill up netInfo"
+    "TODO: Please add support here to set the bind host and port"
+    bindAddr="::"
+    bindPort=8081
+
+    try:
+        "Start flask"
+        app.run(host=bindAddr, port=bindPort)
+    except:
+        print("Couldn't start OpenBonobo")
+
+"Start OBNET"
+init()
