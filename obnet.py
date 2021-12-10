@@ -68,15 +68,6 @@ def api():
     data=fetchJSON("/tmp/openbnet.sock")
     return data
 
-"Returns a list of servers"
-def fetchServers():
-    servers=["lockdown.bnet", "reddawn648.bnet", "sparrow.bnet"]
-
-
-    data=fetchJSON("/tmp/openbnet.sock")
-
-
-    return servers
 
 "Fetches the JSON from the server"
 def fetchJSON(unixPath):
