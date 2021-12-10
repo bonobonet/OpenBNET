@@ -10,6 +10,7 @@ import json
 import sys
 import time
 from os import environ as env
+from os.path import join as path_join
 from socket import AddressFamily, SocketKind, socket
 from threading import Lock
 
@@ -127,7 +128,7 @@ def raw():
 
 @app.route("/assets/<file>", methods=["GET"])
 def assets(file):
-    return send_file(file)
+    return send_file(path_join("assets", file))
 
 
 @app.route("/api", methods=["GET"])
