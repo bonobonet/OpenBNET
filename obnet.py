@@ -111,7 +111,7 @@ def api():
 
 "Error handler for 404"
 @app.errorhandler(Exception)
-def notFoundHandler():
+def notFoundHandler(code):
     return render_template("404.html", **netInfo)
 
 "Start the process"
