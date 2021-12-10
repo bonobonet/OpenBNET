@@ -72,7 +72,7 @@ def home():
 
     # Grab servers
     if json_data is not None:
-        SERVERS = json_data["servers"]
+        SERVERS = json_data["serv"]
     else:
         SERVERS = -1
         json_data = {
