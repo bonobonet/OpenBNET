@@ -74,14 +74,7 @@ def home():
     if json_data is not None:
         SERVERS = json_data["serv"]
     else:
-        SERVERS = -1
-        json_data = {
-            "channels": -1,
-            "clients": -1,
-            "operators": -1,
-            "messages": -1,
-            "servers": -1,
-        }
+        abort("Error whilst contacting the IRC daemon")
 
     # Grab general info
     network_state = {}
