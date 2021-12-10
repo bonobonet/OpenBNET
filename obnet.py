@@ -109,11 +109,10 @@ def api():
     data = fetch_json(UNREAL_SOCKET_PATH)
     return data
 
-
 "Error handler for 404"
 @app.errorhandler(Exception)
 def notFoundHandler():
-    retur  render_template("404.html", **netInfo)
+    return render_template("404.html", **netInfo)
 
 "Start the process"
 def init():
