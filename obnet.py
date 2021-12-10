@@ -24,10 +24,6 @@ NET_INFO = {
     "networkLogo": "open_bnet_banner.png",
 }
 
-# TODO: Fetch json
-# TODO: asset handler
-# TODO: Custom error pages
-
 # Last server fetch
 SERVERS = []
 
@@ -74,7 +70,7 @@ def home():
     if json_data is not None:
         SERVERS = json_data["serv"]
     else:
-        abort("Error whilst contacting the IRC daemon")
+        abort(Exception("Error whilst contacting the IRC daemon"))
 
     # Grab general info
     network_state = {}
