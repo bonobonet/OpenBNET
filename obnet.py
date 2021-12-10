@@ -86,6 +86,12 @@ def fetchJSON(unixPath):
         print(e)
         return None
 
+"Error handler for 404"
+@app.errorhandler(Exception)
+def notFoundHandler():
+    retur  render_template("404.html", **netInfo)
+
+"Start the process"
 def init():
     "TODO: Please add support here to get environment variables to fill up netInfo"
     "TODO: Please add support here to set the bind host and port"
