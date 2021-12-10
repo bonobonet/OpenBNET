@@ -47,7 +47,7 @@ class FetchJSON:
             return None
 
         with self.lock:
-            if time.time() - self.last_update > self.expires_after:
+            if time.time() - self.last_update < self.expires_after:
                 return self.json_data
 
             try:
