@@ -37,7 +37,7 @@ def fetch_json(unix_path):
     "Fetches the JSON from the server
 
     Args:
-        unixPath (str): The path to the socket
+        unix_path (str): The path to the socket
 
     Returns:
         dict or None: The JSON data or None if the socket is not available
