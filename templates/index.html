@@ -22,14 +22,13 @@
                     <th>Server</th>
                     <th>Users online</th>
                 </tr>
-                <tr>
-                    <td>{{ server['name'] }}</td>
-                    <td>{{ server['users'] }}</td>
-                </tr>
-            </table>
-            {% for server in servers %}
-                <p>{{ server['name'] }} (Users: {{ server['users'] }})</p>
-            {% endfor %}
+                {% for server in servers %}
+                    <tr>
+                        <td>{{ server['name'] }}</td>
+                        <td>{{ server['users'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>            
 
             <br>
 
