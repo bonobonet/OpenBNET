@@ -69,7 +69,6 @@ def api():
     data=fetchJSON(unrealSocketPath)
     return data
 
-
 "Fetches the JSON from the server"
 def fetchJSON(unixPath):
     try:
