@@ -102,13 +102,25 @@ def api():
     data = fetch_json(UNREAL_SOCKET_PATH)
     return data
 
-"Error handler for 404"
+
 @app.errorhandler(Exception)
-def notFoundHandler(code):
+def handle_exception(code):
+    """
+    Handles all errors
+    """
     return render_template("error.html", **NET_INFO, code=code)
 
-"Start the process"
+
 def init():
+    """
+    Starts the server
+
+    Args:
+        None
+
+    Returns:
+        None
+    """
     try:
         bind_addr = str(env["OPENBNET_BIND_ADDR"])
     except KeyError:
