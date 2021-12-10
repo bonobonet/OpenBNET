@@ -58,7 +58,7 @@ def home():
 @app.route("/raw", methods=["GET"])
 def raw():
     raw=fetchJSON("/tmp/openbnet.sock")
-    return render_template("raw.html", raw=raw)
+    return render_template("raw.html", raw=raw, **netInfo)
 
 @app.route("/assets/<file>", methods=["GET"])
 def assets(file):
