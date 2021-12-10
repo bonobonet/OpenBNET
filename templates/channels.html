@@ -13,19 +13,23 @@
         <hr>
 
         <div>
-            <h2>Servers</h2>
-            <p><i>A complete list of all currently active linked servers is below</i></p>
+            <h2>Channels</h2>
+            <p><i>A complete list of all channels available on the network.</i></p>
             <br>
 
             <table>
                 <tr>
-                    <th>Server</th>
-                    <th>Users online</th>
+                    <th>Channel</th>
+                    <th>Users</th>
+                    <th>Messages</th>
+                    <th>Topic</th>
                 </tr>
-                {% for server in servers %}
+                {% for channel in channels %}
                     <tr>
-                        <td>{{ server['name'] }}</td>
+                        <td>{{ server['channel'] }}</td>
                         <td>{{ server['users'] }}</td>
+                        <td>{{ server['messages'] }}</td>
+                        <td>{{ server['topics'] }}</td>
                     </tr>
                 {% endfor %}
             </table>            
