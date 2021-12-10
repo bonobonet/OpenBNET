@@ -117,7 +117,7 @@ def channelsDierciory():
         "TODO: This actually doesn't work, mmm"
         abort(Exception("Error whilst contacting the IRC daemon"))
 
-    return render_template("index.html", **NET_INFO, channels=CHANNELS)
+    return render_template("channels.html", **NET_INFO, channels=CHANNELS)
 
 @app.route("/raw", methods=["GET"])
 def raw():
