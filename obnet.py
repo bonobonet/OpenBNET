@@ -28,6 +28,7 @@ NET_INFO = {
 
 # Last server fetch
 SERVERS = []
+CHANNELS = []
 
 # Socket for unrealircd
 SOCK = None
@@ -100,6 +101,23 @@ def home():
 
     return render_template("index.html", **NET_INFO, servers=SERVERS, **network_state)
 
+
+@app.route("/channels", methods=["GET"])
+def channelsDierciory():
+    global NET_INFO
+    global CHANNELS
+
+    # Fetch the information form unrealircd socket
+    json_data = FETCH_JSON.get()
+
+    # Grab servers
+    if json_data is not None:
+        CHANNELS = json_data["chan"]
+    else:
+        "TODO: This actually doesn't work, mmm"
+        abort(Exception("Error whilst contacting the IRC daemon"))
+
+    return render_template("index.html", **NET_INFO, channels=CHANNELS)
 
 @app.route("/raw", methods=["GET"])
 def raw():

@@ -26,10 +26,10 @@
                 </tr>
                 {% for channel in channels %}
                     <tr>
-                        <td>{{ server['channel'] }}</td>
-                        <td>{{ server['users'] }}</td>
-                        <td>{{ server['messages'] }}</td>
-                        <td>{{ server['topics'] }}</td>
+                        <td>{{ channel['channel'] }}</td>
+                        <td>{{ channel['users'] }}</td>
+                        <td>{{ channel['messages'] }}</td>
+                        <td>{{ channel['topics'] }}</td>
                     </tr>
                 {% endfor %}
             </table>            
