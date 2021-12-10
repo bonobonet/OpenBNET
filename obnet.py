@@ -96,8 +96,6 @@ def home():
 
 @app.route("/channels", methods=["GET"])
 def channels_direciory():
-    global NET_INFO
-
     # Fetch the information form unrealircd socket
     json_data = FETCH_JSON.get()
 
