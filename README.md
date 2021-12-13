@@ -43,6 +43,19 @@ OPENBNET_BIND_ADDR="::" OPENBNET_BIND_PORT=8081 UNREAL_SOCKET_PATH=/tmp/openbnet
 
 There is an example systemd unit file included in the repository as `openbnet.service`
 
+## Custom branding
+
+You can adjust the branding in `obnet.py` by taking a look at the following:
+
+```python
+# Network information
+NET_INFO = {
+    "networkName": "OpenBonobo",
+    "description": "Network statistics for the BonoboNET network",
+    "networkLogo": "open_bnet_banner.png",
+}
+```
+
 ## License
 
 This project uses the [AGPL version 3](https://www.gnu.org/licenses/agpl-3.0.en.html) license.
