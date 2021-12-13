@@ -16,6 +16,8 @@ apt install python3 python3-pip
 pip3 install flask
 ```
 
+You will need to configure the `third/wwwstats` module as well, information on doing so can be found [here](http://deavmi.assigned.network/projects/bonobonet/openbnet/).
+
 ## Usage
 
 Firstly grab all the files in this repository, then:
