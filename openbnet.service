@@ -1,0 +1,16 @@
+[Unit]
+Description=OpenBNET Tracker
+Requires=network.target
+After=network.target
+
+[Service]
+User=deavmi
+WorkingDirectory=/home/deavmi/src/OpenBNET
+Environment=OPENBNET_BIND_ADDR="::"
+Environment=OPENBNET_BIND_PORT=8081
+Environment=UNREAL_SOCKET_PATH=/tmp/openbnet.sock
+ExecStart=/home/deavmi/src/OpenBNET/obnet.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
