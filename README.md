@@ -20,7 +20,7 @@ Available at `/`:
 
 ### Channels directory
 
-Available at `/channe;s`:
+Available at `/channels`:
 
 ![](screenshots/chan_list.png)
 
