@@ -1,8 +1,15 @@
-OpenBNET
-========
+<center>
+
+![](assets/open_bnet_banner.png)
+ 
+# OpenBNET
 
 Lightweight web interface and API endpoint for the `third/wwwstats` unrealircd module.
 
+</center>
+
+---
+ 
 ## Setting up
 
 You will need the following and can install them easily:
