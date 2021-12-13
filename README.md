@@ -41,7 +41,7 @@ OPENBNET_BIND_ADDR="::" OPENBNET_BIND_PORT=8081 UNREAL_SOCKET_PATH=/tmp/openbnet
 
 ### Systemd-unit
 
-There is a systemd unit file included in the repository.
+There is an example systemd unit file included in the repository.
 
 ## License
 
