@@ -9,7 +9,33 @@ Lightweight web interface and API endpoint for the `third/wwwstats` unrealircd m
 </center>
 
 ---
- 
+
+## Screenshots
+
+### Home
+
+Available at `/`:
+
+![](screenshots/home.png)
+
+### Channels directory
+
+Available at `/channe;s`:
+
+![](screenshots/chan_list.png)
+
+### Raw output
+
+Available at `/raw`:
+
+![](screenshots/raw.png)
+
+### API endpoint
+
+Available at `/api`:
+
+![](screenshots/api.png)
+
 ## Setting up
 
 You will need the following and can install them easily:
