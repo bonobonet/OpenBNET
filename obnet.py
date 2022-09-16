@@ -9,12 +9,13 @@ A simple web service that provides insight into the BonoboNET network
 import json
 import sys
 import time
+from math import sin
 from os import environ as env
 from os.path import join as path_join
 from socket import AddressFamily, SocketKind, socket
 from threading import Lock
 
-from flask import Flask, abort, render_template, Response
+from flask import Flask, Response, abort, render_template
 from flask.helpers import send_file
 
 # Graph related tooling
@@ -52,6 +53,9 @@ class FetchJSON:
 
         with self.lock:
             if time.time() - self.last_update < self.expires_after:
+                seaborn.set_theme()
+                plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
+                plt.savefig("assets/bruh.svg")
                 return self.json_data
 
             try:
@@ -120,6 +124,9 @@ def graphs():
     plt.savefig("assets/bruh.svg")
 
     return render_template("graphs.html")
+
+    return render_template("graphs.html")
+
 
 @app.route("/raw", methods=["GET"])
 def raw():
