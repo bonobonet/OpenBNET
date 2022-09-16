@@ -123,7 +123,7 @@ def graphs():
     plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
     plt.savefig("assets/bruh.svg")
 
-    return render_template("graphs.html")
+    return render_template("graphs.html", **NET_INFO)
 
 
 @app.route("/raw", methods=["GET"])
