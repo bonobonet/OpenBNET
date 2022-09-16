@@ -106,6 +106,17 @@ def channels_direciory():
     return render_template("channels.html", **NET_INFO, channels=json_data["chan"])
 
 
+@app.route("/graphs", methods=["GET"])
+def graphs():
+    import matplotlib.pyplot as plt
+    from math import sin
+    import seaborn
+    seaborn.set_theme()
+    plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
+    plt.savefig("assets/bruh.svg")
+
+    return render_template("graphs.html")
+
 @app.route("/raw", methods=["GET"])
 def raw():
     raw_data = FETCH_JSON.get()
