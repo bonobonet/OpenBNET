@@ -43,10 +43,11 @@ You will need the following and can install them easily:
 1. `python3`
 2. `flask`
 3. `pip`
+4. `seaborn`
 
 ```
 apt install python3 python3-pip
-pip3 install flask
+pip3 install flask seaborn
 ```
 
 You will need to configure the `third/wwwstats` module as well, information on doing so can be found [here](http://deavmi.assigned.network/projects/bonobonet/openbnet/).
