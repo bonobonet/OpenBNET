@@ -48,6 +48,7 @@ You will need the following and can install them easily:
 ```
 apt install python3 python3-pip
 pip3 install flask seaborn
+apt install libatlas-base-dev #Seaborn or something needs it
 ```
 
 You will need to configure the `third/wwwstats` module as well, information on doing so can be found [here](http://deavmi.assigned.network/projects/bonobonet/openbnet/).
