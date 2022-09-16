@@ -17,6 +17,13 @@ from threading import Lock
 from flask import Flask, abort, render_template, Response
 from flask.helpers import send_file
 
+# Graph related tooling
+import matplotlib.pyplot as plt
+import seaborn
+
+# Initialize seaborn
+seaborn.set_theme()
+
 # Setup the flask instance
 app = Flask(__name__)
 
@@ -108,10 +115,7 @@ def channels_direciory():
 
 @app.route("/graphs", methods=["GET"])
 def graphs():
-    import matplotlib.pyplot as plt
     from math import sin
-    import seaborn
-    seaborn.set_theme()
     plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
     plt.savefig("assets/bruh.svg")
 
