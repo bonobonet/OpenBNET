@@ -47,10 +47,8 @@ class FetchJSON:
             return None
 
         with self.lock:
-            if time.time() - self.last_update < self.expires_after:
-                seaborn.set_theme()
-                plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
-                plt.savefig("assets/bruh.svg")
+            # return cached copy if threshold to update wasn't passed
+            if time.perf_counter() - self.last_update < self.expires_after:
                 return self.json_data
 
             try:
@@ -64,14 +62,18 @@ class FetchJSON:
                 json_data = json.loads(str_data)
 
                 self.json_data = json_data
-                self.last_update = time.time()
+                self.last_update = time.perf_counter()
+
+                seaborn.set_theme()
+                plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
+                plt.savefig("assets/bruh.svg")
 
                 return json_data
             except Exception as exception:
                 print(exception)
 
                 self.json_data = None
-                self.last_update = time.time()
+                self.last_update = time.perf_counter()
 
                 return None
 
@@ -115,7 +117,6 @@ def channels_direciory():
 @app.route("/graphs", methods=["GET"])
 def graphs():
     return render_template("graphs.html")
-
 
 @app.route("/raw", methods=["GET"])
 def raw():
