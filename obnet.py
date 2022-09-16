@@ -125,8 +125,6 @@ def graphs():
 
     return render_template("graphs.html")
 
-    return render_template("graphs.html")
-
 
 @app.route("/raw", methods=["GET"])
 def raw():
