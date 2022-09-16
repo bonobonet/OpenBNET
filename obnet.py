@@ -15,10 +15,15 @@ from os.path import join as path_join
 from socket import AddressFamily, SocketKind, socket
 from threading import Lock
 
-import matplotlib.pyplot as plt
-import seaborn
 from flask import Flask, Response, abort, render_template
 from flask.helpers import send_file
+
+# Graph related tooling
+import matplotlib.pyplot as plt
+import seaborn
+
+# Initialize seaborn
+seaborn.set_theme()
 
 # Setup the flask instance
 app = Flask(__name__)
@@ -116,7 +121,11 @@ def channels_direciory():
 
 @app.route("/graphs", methods=["GET"])
 def graphs():
-    return render_template("graphs.html")
+    from math import sin
+    plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
+    plt.savefig("assets/bruh.svg")
+
+    return render_template("graphs.html", **NET_INFO)
 
 @app.route("/raw", methods=["GET"])
 def raw():
