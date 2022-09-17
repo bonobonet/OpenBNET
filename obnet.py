@@ -120,6 +120,7 @@ class FetchJSON:
                 plt.plot(self.logging_dates, self.clients, label="clients")
                 plt.plot(self.logging_dates, self.operators, label="operators")
                 plt.plot(self.logging_dates, self.messages, label="messages")
+                plt.legend()
                 plt.savefig("assets/bruh.svg")
 
                 return json_data
