@@ -52,6 +52,13 @@ LOGGING_PATH = "assets/logging.csv.gz"
 def block_until_file_exists(fname):
     while not os.path.isfile(fname):
         time.sleep(0.5)
+    old_value = os.stat(fname).st_size
+    while True:
+        time.sleep(0.5)
+        new_value = os.stat(fname).st_size
+        if new_value == old_value:
+            break
+        old_value = new_value
     return True
 
 
