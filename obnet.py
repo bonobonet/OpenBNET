@@ -172,11 +172,6 @@ def channels_direciory():
 
 @app.route("/graphs", methods=["GET"])
 def graphs():
-    from math import sin
-
-    plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
-    plt.savefig("assets/bruh.svg")
-
     return render_template("graphs.html", **NET_INFO)
 
 
