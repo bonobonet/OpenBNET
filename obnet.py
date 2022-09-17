@@ -148,9 +148,9 @@ class FetchJSON:
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.channels, label="channels")
                 plt.legend()
-                plt.savefig("assets/channels_graph.svg.WORKING")
+                plt.savefig("assets/channels_graph.WORKING.svg")
                 os.rename(
-                    "assets/channels_graph.svg.WORKING", "assets/channels_graph.svg"
+                    "assets/channels_graph.WORKING.svg", "assets/channels_graph.svg"
                 )
 
                 plt.cla()
@@ -158,9 +158,9 @@ class FetchJSON:
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.clients, label="clients")
                 plt.legend()
-                plt.savefig("assets/clients_graph.svg.WORKING")
+                plt.savefig("assets/clients_graph.WORKING.svg")
                 os.rename(
-                    "assets/clients_graph.svg.WORKING", "assets/clients_graph.svg"
+                    "assets/clients_graph.WORKING.svg", "assets/clients_graph.svg"
                 )
 
                 plt.cla()
@@ -168,9 +168,9 @@ class FetchJSON:
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.operators, label="operators")
                 plt.legend()
-                plt.savefig("assets/operators_graph.svg.WORKING")
+                plt.savefig("assets/operators_graph.WORKING.svg")
                 os.rename(
-                    "assets/operators_graph.svg.WORKING", "assets/operators_graph.svg"
+                    "assets/operators_graph.WORKING.svg", "assets/operators_graph.svg"
                 )
 
                 plt.cla()
@@ -178,9 +178,9 @@ class FetchJSON:
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.messages, label="messages")
                 plt.legend()
-                plt.savefig("assets/messages_graph.svg.WORKING")
+                plt.savefig("assets/messages_graph.WORKING.svg")
                 os.rename(
-                    "assets/messages_graph.svg.WORKING", "assets/messages_graph.svg"
+                    "assets/messages_graph.WORKING.svg", "assets/messages_graph.svg"
                 )
 
                 return json_data
