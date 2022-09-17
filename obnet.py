@@ -13,8 +13,6 @@ import io
 import json
 import sys
 import time
-from asyncore import read
-from math import sin
 from os import environ as env
 from os.path import join as path_join
 from socket import AddressFamily, SocketKind, socket
