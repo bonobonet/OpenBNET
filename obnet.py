@@ -27,6 +27,7 @@ import seaborn
 # Flask
 from flask import Flask, Response, abort, render_template
 from flask.helpers import send_file
+from genericpath import isfile
 
 # Initialize seaborn
 seaborn.set_theme()
@@ -46,6 +47,12 @@ UNREAL_SOCKET_PATH = "/tmp/openbnet.sock"
 
 # Logging path
 LOGGING_PATH = "assets/logging.csv.gz"
+
+
+def block_until_file_exists(fname):
+    while not os.path.isfile(fname):
+        time.sleep(0.5)
+    return True
 
 
 class FetchJSON:
@@ -148,6 +155,7 @@ class FetchJSON:
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.channels, label="channels")
                 plt.savefig("assets/channels_graph.WORKING.svg")
+                block_until_file_exists("assets/channels_graph.WORKING.svg")
                 os.rename(
                     "assets/channels_graph.WORKING.svg", "assets/channels_graph.svg"
                 )
@@ -157,6 +165,7 @@ class FetchJSON:
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.clients, label="clients")
                 plt.savefig("assets/clients_graph.WORKING.svg")
+                block_until_file_exists("assets/clients_graph.WORKING.svg")
                 os.rename(
                     "assets/clients_graph.WORKING.svg", "assets/clients_graph.svg"
                 )
@@ -166,6 +175,7 @@ class FetchJSON:
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.operators, label="operators")
                 plt.savefig("assets/operators_graph.WORKING.svg")
+                block_until_file_exists("assets/operators_graph.WORKING.svg")
                 os.rename(
                     "assets/operators_graph.WORKING.svg", "assets/operators_graph.svg"
                 )
@@ -175,6 +185,7 @@ class FetchJSON:
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.messages, label="messages")
                 plt.savefig("assets/messages_graph.WORKING.svg")
+                block_until_file_exists("assets/messages_graph.WORKING.svg")
                 os.rename(
                     "assets/messages_graph.WORKING.svg", "assets/messages_graph.svg"
                 )
