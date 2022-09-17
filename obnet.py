@@ -6,21 +6,26 @@ OpenBNET
 A simple web service that provides insight into the BonoboNET network
 """
 
+import csv
+import gzip
+import io
 import json
 import sys
 import time
+from asyncore import read
+from datetime import datetime
 from math import sin
 from os import environ as env
 from os.path import join as path_join
 from socket import AddressFamily, SocketKind, socket
 from threading import Lock
 
-from flask import Flask, Response, abort, render_template
-from flask.helpers import send_file
-
 # Graph related tooling
 import matplotlib.pyplot as plt
 import seaborn
+# Flask
+from flask import Flask, Response, abort, render_template
+from flask.helpers import send_file
 
 # Initialize seaborn
 seaborn.set_theme()
@@ -38,6 +43,9 @@ NET_INFO = {
 # Socket for unrealircd
 UNREAL_SOCKET_PATH = "/tmp/openbnet.sock"
 
+# Logging path
+LOGGING_PATH = "assets/logging.csv.gz"
+
 
 class FetchJSON:
     def __init__(self, unix_path, expires_after=60):
@@ -46,6 +54,13 @@ class FetchJSON:
         self.expires_after = expires_after
         self.last_update = -self.expires_after - 1
         self.lock = Lock()
+
+        # For logging and (to later) avoid reploting
+        self.logging_dates = []
+        self.channels = []
+        self.clients = []
+        self.operators = []
+        self.messages = []
 
     def get(self):
         if self.unix_path is None:
@@ -69,8 +84,42 @@ class FetchJSON:
                 self.json_data = json_data
                 self.last_update = time.perf_counter()
 
+                current_time = time.time()
+                with gzip.open(LOGGING_PATH, "w") as file:
+                    writer = csv.writer(
+                        io.TextIOWrapper(file, newline="", write_through=True)
+                    )
+                    writer.writerow(
+                        [
+                            time.time(),
+                            json_data["channels"],
+                            json_data["clients"],
+                            json_data["operators"],
+                            json_data["messages"],
+                        ]
+                    )
+
                 seaborn.set_theme()
-                plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
+                plt.clf()
+                if len(self.logging_dates) == 0:
+                    with gzip.open(LOGGING_PATH, "r") as file:
+                        reader = csv.reader(io.TextIOWrapper(file, newline=""))
+                        for row in reader:
+                            self.logging_dates.append(current_time)
+                            self.channels.append(row[1])
+                            self.clients.append(row[2])
+                            self.operators.append(row[3])
+                            self.messages.append(row[4])
+                else:
+                    self.logging_dates.append(current_time)
+                    self.channels.append(json_data["channels"])
+                    self.clients.append(json_data["clients"])
+                    self.operators.append(json_data["operators"])
+                    self.messages.append(json_data["messages"])
+                plt.plot(self.logging_dates, self.channels, label="channels")
+                plt.plot(self.logging_dates, self.clients, label="clients")
+                plt.plot(self.logging_dates, self.operators, label="operators")
+                plt.plot(self.logging_dates, self.messages, label="messages")
                 plt.savefig("assets/bruh.svg")
 
                 return json_data
@@ -122,10 +171,12 @@ def channels_direciory():
 @app.route("/graphs", methods=["GET"])
 def graphs():
     from math import sin
+
     plt.plot([i for i in range(20)], [sin(i) for i in range(20)])
     plt.savefig("assets/bruh.svg")
 
     return render_template("graphs.html", **NET_INFO)
+
 
 @app.route("/raw", methods=["GET"])
 def raw():
