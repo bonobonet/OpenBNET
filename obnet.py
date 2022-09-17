@@ -169,6 +169,7 @@ class FetchJSON:
                 return json_data
             except Exception as exception:
                 print(exception)
+                print("Hello?")
 
                 self.json_data = None
                 self.last_update = time.perf_counter()
