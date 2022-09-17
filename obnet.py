@@ -104,7 +104,7 @@ class FetchJSON:
                         reader = csv.reader(io.TextIOWrapper(file, newline=""))
                         for row in reader:
                             self.logging_dates.append(
-                                dt.datetime.fromtimestamp(current_time)
+                                dt.datetime.fromtimestamp(row[0])
                             )
                             self.channels.append(row[1])
                             self.clients.append(row[2])
