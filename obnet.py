@@ -116,7 +116,7 @@ class FetchJSON:
                     self.clients.append(json_data["clients"])
                     self.operators.append(json_data["operators"])
                     self.messages.append(json_data["messages"])
-                plt.xlim(left=self.logging_dates[0])
+                plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.channels, label="channels")
                 plt.plot(self.logging_dates, self.clients, label="clients")
                 plt.plot(self.logging_dates, self.operators, label="operators")
