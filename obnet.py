@@ -86,6 +86,7 @@ class FetchJSON:
 
     def get(self):
         if self.unix_path is None:
+            print("Bruh")
             return None
 
         with self.lock:
