@@ -92,6 +92,7 @@ class FetchJSON:
         with self.lock:
             # return cached copy if threshold to update wasn't passed
             if time.perf_counter() - self.last_update < self.expires_after:
+                print("fok")
                 return self.json_data
 
             try:
