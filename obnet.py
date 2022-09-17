@@ -80,7 +80,7 @@ class FetchJSON:
                 pass
 
             if time.perf_counter() - self.last_update > self.expires_after:
-                FETCH_JSON.get()
+                self.get()
 
             time.sleep(0.5)
 
