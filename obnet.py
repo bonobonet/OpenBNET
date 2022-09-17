@@ -128,7 +128,9 @@ class FetchJSON:
                     with gzip.open(LOGGING_PATH, "r") as file:
                         reader = csv.reader(io.TextIOWrapper(file, newline=""))
                         for row in reader:
-                            self.logging_dates.append(dt.datetime.fromtimestamp(row[0]))
+                            self.logging_dates.append(
+                                dt.datetime.fromtimestamp(float(row[0]))
+                            )
                             self.channels.append(row[1])
                             self.clients.append(row[2])
                             self.operators.append(row[3])
@@ -174,6 +176,7 @@ class FetchJSON:
                 self.last_update = time.perf_counter()
                 raise
 
+
 FETCH_JSON = FetchJSON(UNREAL_SOCKET_PATH)
 
 
@@ -184,7 +187,7 @@ def home():
 
     # Grab servers
     if json_data is None:
-        print("json_data is: %s"%json_data)
+        print("json_data is: %s" % json_data)
         abort(Response(response="Error whilst contacting the IRC daemon", status=404))
 
     # Grab general info
