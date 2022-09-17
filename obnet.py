@@ -82,14 +82,14 @@ class FetchJSON:
                 self.json_data = json_data
                 self.last_update = time.perf_counter()
 
-                current_time = time.time()
+                current_time = time.mktime(time.gmtime())
                 with gzip.open(LOGGING_PATH, "a") as file:
                     writer = csv.writer(
                         io.TextIOWrapper(file, newline="", write_through=True)
                     )
                     writer.writerow(
                         [
-                            time.time(),
+                            current_time,
                             json_data["channels"],
                             json_data["clients"],
                             json_data["operators"],
