@@ -144,6 +144,8 @@ class FetchJSON:
                 plt.clf()
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.channels, label="channels")
+                plt.xlabel("Time")
+                plt.ylabel("Number")
                 plt.legend()
                 plt.savefig("assets/channels_graph.svg")
 
@@ -151,6 +153,8 @@ class FetchJSON:
                 plt.clf()
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.clients, label="clients")
+                plt.xlabel("Time")
+                plt.ylabel("Number")
                 plt.legend()
                 plt.savefig("assets/clients_graph.svg")
 
@@ -158,6 +162,8 @@ class FetchJSON:
                 plt.clf()
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.operators, label="operators")
+                plt.xlabel("Time")
+                plt.ylabel("Number")
                 plt.legend()
                 plt.savefig("assets/operators_graph.svg")
 
@@ -165,6 +171,8 @@ class FetchJSON:
                 plt.clf()
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.messages, label="messages")
+                plt.xlabel("Time")
+                plt.ylabel("Number")
                 plt.legend()
                 plt.savefig("assets/messages_graph.svg")
 
