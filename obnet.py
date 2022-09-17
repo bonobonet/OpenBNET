@@ -7,13 +7,13 @@ A simple web service that provides insight into the BonoboNET network
 """
 
 import csv
+import datetime as dt
 import gzip
 import io
 import json
 import sys
 import time
 from asyncore import read
-from datetime import datetime
 from math import sin
 from os import environ as env
 from os.path import join as path_join
@@ -105,13 +105,15 @@ class FetchJSON:
                     with gzip.open(LOGGING_PATH, "r") as file:
                         reader = csv.reader(io.TextIOWrapper(file, newline=""))
                         for row in reader:
-                            self.logging_dates.append(current_time)
+                            self.logging_dates.append(
+                                dt.datetime.fromtimestamp(current_time)
+                            )
                             self.channels.append(row[1])
                             self.clients.append(row[2])
                             self.operators.append(row[3])
                             self.messages.append(row[4])
                 else:
-                    self.logging_dates.append(current_time)
+                    self.logging_dates.append(dt.datetime.fromtimestamp(current_time))
                     self.channels.append(json_data["channels"])
                     self.clients.append(json_data["clients"])
                     self.operators.append(json_data["operators"])
