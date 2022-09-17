@@ -11,6 +11,7 @@ import datetime as dt
 import gzip
 import io
 import json
+import os
 import queue
 import sys
 import threading
@@ -128,7 +129,9 @@ class FetchJSON:
                     with gzip.open(LOGGING_PATH, "r") as file:
                         reader = csv.reader(io.TextIOWrapper(file, newline=""))
                         for row in reader:
-                            self.logging_dates.append(dt.datetime.fromtimestamp(row[0]))
+                            self.logging_dates.append(
+                                dt.datetime.fromtimestamp(float(row[0]))
+                            )
                             self.channels.append(row[1])
                             self.clients.append(row[2])
                             self.operators.append(row[3])
@@ -146,8 +149,10 @@ class FetchJSON:
                 plt.plot(self.logging_dates, self.channels, label="channels")
                 plt.xlabel("Time")
                 plt.ylabel("Number")
-                plt.legend()
-                plt.savefig("assets/channels_graph.svg")
+                plt.savefig("assets/channels_graph.WORKING.svg")
+                os.rename(
+                    "assets/channels_graph.WORKING.svg", "assets/channels_graph.svg"
+                )
 
                 plt.cla()
                 plt.clf()
@@ -155,8 +160,10 @@ class FetchJSON:
                 plt.plot(self.logging_dates, self.clients, label="clients")
                 plt.xlabel("Time")
                 plt.ylabel("Number")
-                plt.legend()
-                plt.savefig("assets/clients_graph.svg")
+                plt.savefig("assets/clients_graph.WORKING.svg")
+                os.rename(
+                    "assets/clients_graph.WORKING.svg", "assets/clients_graph.svg"
+                )
 
                 plt.cla()
                 plt.clf()
@@ -164,8 +171,10 @@ class FetchJSON:
                 plt.plot(self.logging_dates, self.operators, label="operators")
                 plt.xlabel("Time")
                 plt.ylabel("Number")
-                plt.legend()
-                plt.savefig("assets/operators_graph.svg")
+                plt.savefig("assets/operators_graph.WORKING.svg")
+                os.rename(
+                    "assets/operators_graph.WORKING.svg", "assets/operators_graph.svg"
+                )
 
                 plt.cla()
                 plt.clf()
@@ -173,14 +182,17 @@ class FetchJSON:
                 plt.plot(self.logging_dates, self.messages, label="messages")
                 plt.xlabel("Time")
                 plt.ylabel("Number")
-                plt.legend()
-                plt.savefig("assets/messages_graph.svg")
+                plt.savefig("assets/messages_graph.WORKING.svg")
+                os.rename(
+                    "assets/messages_graph.WORKING.svg", "assets/messages_graph.svg"
+                )
 
                 return json_data
             except Exception:
                 self.json_data = None
                 self.last_update = time.perf_counter()
                 raise
+
 
 FETCH_JSON = FetchJSON(UNREAL_SOCKET_PATH)
 
@@ -192,7 +204,7 @@ def home():
 
     # Grab servers
     if json_data is None:
-        print("json_data is: %s"%json_data)
+        print("json_data is: %s" % json_data)
         abort(Response(response="Error whilst contacting the IRC daemon", status=404))
 
     # Grab general info
