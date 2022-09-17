@@ -83,7 +83,7 @@ class FetchJSON:
                 self.last_update = time.perf_counter()
 
                 current_time = time.time()
-                with gzip.open(LOGGING_PATH, "w") as file:
+                with gzip.open(LOGGING_PATH, "a") as file:
                     writer = csv.writer(
                         io.TextIOWrapper(file, newline="", write_through=True)
                     )
