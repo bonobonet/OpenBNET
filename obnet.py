@@ -11,7 +11,9 @@ import datetime as dt
 import gzip
 import io
 import json
+import queue
 import sys
+import threading
 import time
 from os import environ as env
 from os.path import join as path_join
@@ -46,7 +48,7 @@ LOGGING_PATH = "assets/logging.csv.gz"
 
 
 class FetchJSON:
-    def __init__(self, unix_path, expires_after=60):
+    def __init__(self, unix_path, expires_after=30):
         self.unix_path = unix_path
         self.json_data = None
         self.expires_after = expires_after
@@ -59,6 +61,28 @@ class FetchJSON:
         self.clients = []
         self.operators = []
         self.messages = []
+
+        # Run background thread
+        self._thread_kill = queue.Queue()
+        self._thread = threading.Thread(target=self.fetch_json_autoupdater)
+        self._thread.start()
+
+    def close_thread(self):
+        self._thread_kill.put(True)
+        self._thread.join()
+
+    def fetch_json_autoupdater(self):
+        while True:
+            try:
+                self._thread_kill.get_nowait()
+                return
+            except queue.Empty:
+                pass
+
+            if time.perf_counter() - self.last_update > self.expires_after:
+                FETCH_JSON.get()
+
+            time.sleep(0.5)
 
     def get(self):
         if self.unix_path is None:
