@@ -98,14 +98,11 @@ class FetchJSON:
                     )
 
                 seaborn.set_theme()
-                plt.clf()
                 if len(self.logging_dates) == 0:
                     with gzip.open(LOGGING_PATH, "r") as file:
                         reader = csv.reader(io.TextIOWrapper(file, newline=""))
                         for row in reader:
-                            self.logging_dates.append(
-                                dt.datetime.fromtimestamp(row[0])
-                            )
+                            self.logging_dates.append(dt.datetime.fromtimestamp(row[0]))
                             self.channels.append(row[1])
                             self.clients.append(row[2])
                             self.operators.append(row[3])
@@ -116,13 +113,34 @@ class FetchJSON:
                     self.clients.append(json_data["clients"])
                     self.operators.append(json_data["operators"])
                     self.messages.append(json_data["messages"])
+
+                plt.cla()
+                plt.clf()
                 plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.channels, label="channels")
+                plt.legend()
+                plt.savefig("assets/channels_graph.svg")
+
+                plt.cla()
+                plt.clf()
+                plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.clients, label="clients")
+                plt.legend()
+                plt.savefig("assets/clients_graph.svg")
+
+                plt.cla()
+                plt.clf()
+                plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.operators, label="operators")
+                plt.legend()
+                plt.savefig("assets/operators_graph.svg")
+
+                plt.cla()
+                plt.clf()
+                plt.xlim(left=self.logging_dates[0], right=self.logging_dates[-1])
                 plt.plot(self.logging_dates, self.messages, label="messages")
                 plt.legend()
-                plt.savefig("assets/bruh.svg")
+                plt.savefig("assets/messages_graph.svg")
 
                 return json_data
             except Exception as exception:
