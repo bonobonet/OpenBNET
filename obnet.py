@@ -72,14 +72,14 @@ class FetchJSON:
 
         # Run background thread
         self._thread_kill = queue.Queue()
-        self._thread = threading.Thread(target=self.fetch_json_autoupdater)
+        self._thread = threading.Thread(target=self._autoupdater)
         self._thread.start()
 
     def close_thread(self):
         self._thread_kill.put(True)
         self._thread.join()
 
-    def fetch_json_autoupdater(self):
+    def _autoupdater(self):
         while True:
             try:
                 self._thread_kill.get_nowait()
@@ -88,7 +88,10 @@ class FetchJSON:
                 pass
 
             if time.perf_counter() - self.last_update > self.expires_after:
-                self.get()
+                try:
+                    self.get()
+                except Exception as exception:
+                    print(f"Update thread exc: {exception}")
 
             time.sleep(0.5)
 
