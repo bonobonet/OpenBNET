@@ -178,7 +178,7 @@ class FetchJSON:
                 return None
 
 
-FETCH_JSON = FetchJSON(None)
+FETCH_JSON = FetchJSON(UNREAL_SOCKET_PATH)
 
 
 @app.route("/", methods=["GET"])
