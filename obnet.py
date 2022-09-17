@@ -169,15 +169,10 @@ class FetchJSON:
                 plt.savefig("assets/messages_graph.svg")
 
                 return json_data
-            except Exception as exception:
-                print(exception)
-                print("Hello?")
-
+            except Exception:
                 self.json_data = None
                 self.last_update = time.perf_counter()
-
-                return None
-
+                raise
 
 FETCH_JSON = FetchJSON(UNREAL_SOCKET_PATH)
 
