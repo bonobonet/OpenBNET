@@ -5,7 +5,7 @@ import std.stdio;
 // TODO: Make configurable via environment variab;e
 string rpcEndpoint = "https://apiuser:password@127.0.0.1:8001/api";
 
-import std.net.curl
+import std.net.curl;
  
 
 // void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
@@ -19,7 +19,7 @@ void main()
 {
 	writeln("Edit source/app.d to start your project.");
 
-	auto resp = get(rcpEndpoint);
+	auto resp = get(rpcEndpoint);
 	writeln(resp);
 	
 
