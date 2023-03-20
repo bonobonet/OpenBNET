@@ -1,0 +1,36 @@
+doctype html
+html
+	head
+		title #{network.name}
+
+	body
+        center
+            img(src="/assets/{{ networkLogo }}")
+
+
+
+            
+		div(align="left")
+			- import std.string : empty;
+			- import std.range : split;
+			- if(!empty(profile.firstname) && !empty(profile.lastname))
+				h1 #{profile.firstname} #{profile.lastname}
+				h2 #{user.username}
+			- else
+				h1 #{user.username}
+			- if(isProfileOwner)
+				a(href="/account") Edit
+			p Joined #{split(user.created, " ")[0]}
+			br
+			- if(!empty(profile.bio))
+				p #{profile.bio}
+			- else
+				p
+					i This user has no bio
+			br
+			br
+			- if(!empty(profile.homepage))
+				p Homepage: 
+					a(href="#{profile.homepage}") #{profile.homepage}
+			- if(!empty(profile.birthday))
+				p Birthday: #{profile.birthday}
