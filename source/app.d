@@ -6,7 +6,16 @@ import vibe.d;
 string rpcEndpoint = "https://apiuser:password@127.0.0.1:8001/api";
 
 import std.net.curl;
- 
+
+void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
+{
+	// TODO: Add actual channel fetch here
+	import types.channel;
+	Channel[] channels = getDummyChannels();
+
+
+	resp.render!("channels.dt");
+}
 
 void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
@@ -19,8 +28,8 @@ void main()
 {
 	writeln("Edit source/app.d to start your project.");
 
-	auto resp = get(rpcEndpoint);
-	writeln(resp);
+	// auto resp = get(rpcEndpoint);
+	// writeln(resp);
 	
 
 	HTTPServerSettings httpSettings = new HTTPServerSettings();
@@ -30,6 +39,7 @@ void main()
 	URLRouter router = new URLRouter();
 
 	router.get("/", &homeHandler);
+	router.get("/channels", &channelListHandler);
 
 	listenHTTP(httpSettings, router);
 

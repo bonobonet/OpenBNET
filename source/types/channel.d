@@ -4,8 +4,29 @@ import std.json;
 
 version(unittest)
 {
-    import std.stdio;
-    import testInputs : channeList;
+    // import std.stdio;
+    // import testInputs : channeList;
+}
+
+import std.stdio;
+import testInputs : channeList;
+
+public Channel[] getDummyChannels()
+{
+    JSONValue rcpDataIn = parseJSON(channeList);
+
+    Channel[] channels;
+    foreach(JSONValue curChannel; rcpDataIn["result"]["list"].array())
+    {
+        channels ~= Channel.fromJSON(curChannel);
+    }
+    
+    foreach(Channel curChannel; channels)
+    {
+        writeln(curChannel);
+    }
+
+    return channels;
 }
 
 unittest

@@ -4,12 +4,12 @@ html
 		title #{network.name}
 
 	body
-        center
-            img(src="/assets/{{ networkLogo }}")
+		center
+			img(src="/assets/{{ networkLogo }}")
 
 
 
-            
+
 		div(align="left")
 			- import std.string : empty;
 			- import std.range : split;
