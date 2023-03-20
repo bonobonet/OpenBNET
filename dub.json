@@ -4,7 +4,8 @@
 	],
 	"copyright": "Copyright © 2023, Tristan B. Velloza Kildaire",
 	"dependencies": {
-		"handy-httpd": "~>5.6.2"
+		"handy-httpd": "~>5.6.2",
+		"vibe-d": "~>0.9.5"
 	},
 	"description": "A looking glass into unrealircd",
 	"license": "AGPL-3",
