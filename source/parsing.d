@@ -62,6 +62,13 @@ public class Channel
         {
             channel.topic = jsonIn["topic"].str();
             channel.topicSetBy = jsonIn["topic_set_by"].str();
+
+            // Strip off the .XXXZ
+            string topicCreationTimeClean =jsonIn["topic_set_at"].str();
+            import std.string;
+            dotPos = indexOf(topicCreationTimeClean, ".");
+            topicCreationTimeClean = topicCreationTimeClean[0..dotPos];
+            channel.topicSetAt = DateTime.fromISOExtString(topicCreationTimeClean);
         }
         
         
