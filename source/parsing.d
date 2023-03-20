@@ -35,6 +35,7 @@ public class Channel
     private long userCount;
     private string topic, topicSetBy;
     private DateTime topicSetAt;
+    private string modes;
 
 
     private this()
@@ -71,7 +72,7 @@ public class Channel
             channel.topicSetAt = DateTime.fromISOExtString(topicCreationTimeClean);
         }
         
-        
+        channel.modes = jsonIn["modes"].str();
 
 
         return channel;
