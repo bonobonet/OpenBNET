@@ -2,10 +2,10 @@ import std.stdio;
 
 // import vibe.d;
 
-void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
-{
-	resp.writeBody("Hello");
-}
+// void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
+// {
+// 	resp.writeBody("Hello");
+// }
 
 void main()
 {
