@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"Tristan B. Velloza Kildaire"
+	],
+	"copyright": "Copyright © 2023, Tristan B. Velloza Kildaire",
+	"description": "A looking glass into unrealircd",
+	"license": "AGPL-3",
+	"name": "openbnet"
+}
