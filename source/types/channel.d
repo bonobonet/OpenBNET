@@ -108,4 +108,55 @@ public class Channel
                         ", size: "~to!(string)(userCount)~
                         "]";
     }
+
+    public string getName()
+    {
+        return name;
+    }
+
+    public long getUsers()
+    {
+        return userCount;
+    }
+
+    public string getTopic()
+    {
+        return topic;
+    }
+}
+
+
+unittest
+{
+    JSONValue rcpDataIn = parseJSON(channelInfo);
+
+    ChannelInfo channelInfo = ChannelInfo.fromJSON(rcpDataIn["result"]["channel"]);
+}
+
+public class ChannelInfo
+{
+    public struct MemberInfo
+    {
+        public string name;
+        public string id;
+    }
+
+    private string[] bans;
+    private string[] banExemptions;
+    private string[] inviteExceptions;
+    private MemberInfo[] members;
+
+    private this()
+    {
+
+    }
+
+    public static ChannelInfo fromJSON(JSONValue jsonIn)
+    {
+        ChannelInfo channelInfo = new ChannelInfo();
+
+
+
+        return channelInfo;
+    }
 }

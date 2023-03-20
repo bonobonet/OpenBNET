@@ -5,32 +5,42 @@ html
 
 	body
 		center
-			img(src="/assets/{{ networkLogo }}")
+			img(src="/assets/#{network.logo}", width=325.75, height=125)
+			h1(#{network.name})
+
+			<p>{{ description }}</p>
+
+			<hr>
+			<p><a href="/">Home</a> | <a href="/channels"><b>Channel directory</b></a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+			<hr>
+
+			<div>
+				<h2>Channels</h2>
+				<p><i>A complete list of all channels available on the network.</i></p>
+				<br>
+
+				table(border="1")
+					tr
+						th()
+							p Channel
+						th
+							p Users
+						th
+							p Messages
+						th
+							p Topic
+					- import types.channel;
+					- foreach(Channel channel; channels)
+						tr
+							td
+								p #{channel.getName()}
+							td
+								p #{channel.getUsers()}
+							td
+								// - channel.getMessages()();
+							td
+								p #{channel.getTopic()}
+						
 
 
-
-
-		div(align="left")
-			- import std.string : empty;
-			- import std.range : split;
-			- if(!empty(profile.firstname) && !empty(profile.lastname))
-				h1 #{profile.firstname} #{profile.lastname}
-				h2 #{user.username}
-			- else
-				h1 #{user.username}
-			- if(isProfileOwner)
-				a(href="/account") Edit
-			p Joined #{split(user.created, " ")[0]}
-			br
-			- if(!empty(profile.bio))
-				p #{profile.bio}
-			- else
-				p
-					i This user has no bio
-			br
-			br
-			- if(!empty(profile.homepage))
-				p Homepage: 
-					a(href="#{profile.homepage}") #{profile.homepage}
-			- if(!empty(profile.birthday))
-				p Birthday: #{profile.birthday}
+		

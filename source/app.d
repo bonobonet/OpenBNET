@@ -7,6 +7,15 @@ string rpcEndpoint = "https://apiuser:password@127.0.0.1:8001/api";
 
 import std.net.curl;
 
+public class Network
+{
+	public string name;
+	public string logo;
+}
+
+// TODO: A fetch channel should populate with users list inside it
+
+
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
 	// TODO: Add actual channel fetch here
@@ -14,7 +23,8 @@ void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 	Channel[] channels = getDummyChannels();
 
 
-	resp.render!("channels.dt");
+	Network network = new Network();
+	resp.render!("channels.dt", network, channels);
 }
 
 void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)

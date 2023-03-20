@@ -369,3 +369,39 @@ string serverList = `
 }
 
 `;
+
+
+
+string channelInfo = `
+
+{
+  "jsonrpc": "2.0",
+  "method": "channel.get",
+  "id": 123,
+  "result": {
+    "channel": {
+      "name": "#general",
+      "creation_time": "2023-03-19T18:19:29.000Z",
+      "num_users": 15,
+      "modes": "nt",
+      "bans": [],
+      "ban_exemptions": [],
+      "invite_exceptions": [],
+      "members": [
+        {
+          "name": "anontor",
+          "id": "009TJE7B2"
+        },
+        {
+          "name": "Nikat",
+          "id": "065JAHE3U"
+        },
+        {
+          "name": "zh",
+          "id": "0111ID0LO"
+        }
+      ]
+      }
+    }
+}
+`;
