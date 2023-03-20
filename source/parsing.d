@@ -5,40 +5,13 @@ import std.json;
 version(unittest)
 {
     import std.stdio;
+    import testInputs;
 }
 
 unittest
 {
-    JSONValue rcpDataIn = parseJSON(
-    `
-    {
-  "jsonrpc": "2.0",
-  "method": "channel.list",
-  "id": 123,
-  "result": {
-    "list": [
-      {
-        "name": "#ccc",
-        "creation_time": "2023-03-19T18:19:30.000Z",
-        "num_users": 4,
-        "modes": "nt"
-      },
-      {
-        "name": "#gaming",
-        "creation_time": "2023-03-19T19:50:26.000Z",
-        "num_users": 1,
-        "modes": "nt"
-      },
-      {
-        "name": "#network",
-        "creation_time": "2023-03-19T19:50:28.000Z",
-        "num_users": 1,
-        "modes": "nt"
-      }
-    ]
-    }
-   }
-    `);
+    
+    JSONValue rcpDataIn = parseJSON(channeList);
 
     Channel[] channels;
     foreach(JSONValue curChannel; rcpDataIn["result"]["list"].array())
@@ -53,11 +26,16 @@ unittest
 }
 
 import std.datetime.date;
+import std.conv : to;
 
 public class Channel
 {
     private string name;
     private DateTime creationTime;
+    private long userCount;
+    private string topic, topicSetBy;
+    private DateTime topicSetAt;
+
 
     private this()
     {
@@ -78,12 +56,25 @@ public class Channel
         creationTimeClean = creationTimeClean[0..dotPos];
         channel.creationTime = DateTime.fromISOExtString(creationTimeClean);
 
+        channel.userCount = jsonIn["num_users"].integer();
+
+        if("topic" in jsonIn.object())
+        {
+            channel.topic = jsonIn["topic"].str();
+            channel.topicSetBy = jsonIn["topic_set_by"].str();
+        }
+        
+        
+
 
         return channel;
     }
 
     public override string toString()
     {
-        return "Channel [name: "~name~", created: "~creationTime.toString()~"]";
+        return "Channel [name: "~name~
+                        ", created: "~creationTime.toString()~
+                        ", size: "~to!(string)(userCount)~
+                        "]";
     }
 }
