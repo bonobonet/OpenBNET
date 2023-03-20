@@ -231,3 +231,141 @@ string channeList = `
     ]
   }
 }`;
+
+string serverList = `
+{
+  "jsonrpc": "2.0",
+  "method": "server.list",
+  "id": 123,
+  "result": {
+    "list": [
+      {
+        "name": "reddawn648.bnet",
+        "id": "065",
+        "hostname": "255.255.255.255",
+        "ip": null,
+        "details": "reddawn648.bnet",
+        "server": {
+          "info": "Reddawn's Brackenfell BNET IRC Server",
+          "uplink": "braveheart.bnet",
+          "num_users": 3,
+          "boot_time": "2023-03-19T20:35:18.000Z",
+          "synced": true,
+          "ulined": false,
+          "features": {
+            "software": "UnrealIRCd-6.0.7-git-56478f04a",
+            "protocol": 6000,
+            "usermodes": "diopqrstwxzBDGHIRSTWZ",
+            "chanmodes": [
+              "beI",
+              "fkL",
+              "lH",
+              "cdimnprstzCDGKMNOPQRSTVZ"
+            ]
+          }
+        },
+        "tls": {
+          "certfp": "b4581758e2f32eb67ffc8b1821820e4ff287b31cd6096df08f6d5ba6c9b196a8",
+          "cipher": "TLSv1.3-TLS_CHACHA20_POLY1305_SHA256"
+        }
+      },
+      {
+        "name": "braveheart.bnet",
+        "id": "009",
+        "hostname": "300:7232:2b0e:d6e9:216:3eff:fe3c:c82b",
+        "ip": "300:7232:2b0e:d6e9:216:3eff:fe3c:c82b",
+        "details": "braveheart.bnet@300:7232:2b0e:d6e9:216:3eff:fe3c:c82b",
+        "connected_since": "2023-03-20T11:26:51.000Z",
+        "idle_since": "2023-03-20T11:26:51.000Z",
+        "server": {
+          "info": "Official Bri'ish Scones&Tea BNET",
+          "uplink": "worcester.bnet",
+          "num_users": 6,
+          "boot_time": "2023-03-19T19:50:15.000Z",
+          "synced": true,
+          "ulined": false,
+          "features": {
+            "software": "UnrealIRCd-6.0.3-git",
+            "protocol": 6000,
+            "usermodes": "diopqrstwxzBDGHIRSTWZ",
+            "chanmodes": [
+              "beI",
+              "fkL",
+              "lH",
+              "cdimnprstzCDGKMNOPQRSTVZ"
+            ]
+          }
+        },
+        "tls": {
+          "certfp": "0c88acd563e696fbdaffd65c8ca9a8606442db3ca3ca3900fa6d36321b8ca87f",
+          "cipher": "TLSv1.3-TLS_CHACHA20_POLY1305_SHA256"
+        }
+      },
+      {
+        "name": "worcester.bnet",
+        "id": "011",
+        "hostname": "255.255.255.255",
+        "ip": null,
+        "client_port": 6667,
+        "details": "worcester.bnet",
+        "connected_since": "2023-03-20T10:41:08.000Z",
+        "server": {
+          "info": "Deavmi's Worcester Node",
+          "num_users": 7,
+          "boot_time": "2023-03-20T10:41:08.000Z",
+          "features": {
+            "software": "UnrealIRCd-6.0.7-git-e4571a5bf",
+            "protocol": 6000,
+            "usermodes": "diopqrstwxzBDGHIRSTWZ",
+            "chanmodes": [
+              "beI",
+              "fkL",
+              "lH",
+              "cdimnprstzCDGKMNOPQRSTVZ"
+            ],
+            "rpc_modules": [
+              {
+                "name": "rpc",
+                "version": "1.0.2"
+              },
+              {
+                "name": "stats",
+                "version": "1.0.0"
+              },
+              {
+                "name": "user",
+                "version": "1.0.5"
+              },
+              {
+                "name": "server",
+                "version": "1.0.0"
+              },
+              {
+                "name": "channel",
+                "version": "1.0.4"
+              },
+              {
+                "name": "server_ban",
+                "version": "1.0.3"
+              },
+              {
+                "name": "server_ban_exception",
+                "version": "1.0.1"
+              },
+              {
+                "name": "name_ban",
+                "version": "1.0.1"
+              },
+              {
+                "name": "spamfilter",
+                "version": "1.0.3"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
+
+`;

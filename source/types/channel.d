@@ -1,11 +1,11 @@
-module parsing;
+module types.channel;
 
 import std.json;
 
 version(unittest)
 {
     import std.stdio;
-    import testInputs;
+    import testInputs : channeList;
 }
 
 unittest
@@ -37,6 +37,7 @@ public class Channel
     private DateTime topicSetAt;
     private string modes;
 
+    // TODO: add getters for the fields above
 
     private this()
     {
@@ -78,6 +79,7 @@ public class Channel
         return channel;
     }
 
+    // TODO: Finish implementing this
     public override string toString()
     {
         return "Channel [name: "~name~
