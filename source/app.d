@@ -1,25 +1,37 @@
 import std.stdio;
 
-import vibe.d;
+// import vibe.d;
 
-void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
-{
-	resp.writeBody("Hello");
-}
+// TODO: Make configurable via environment variab;e
+string rpcEndpoint = "https://apiuser:password@127.0.0.1:8001/api";
+
+import std.net.curl
+ 
+
+// void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
+// {
+	
+
+// 	resp.writeBody("Hello");
+// }
 
 void main()
 {
 	writeln("Edit source/app.d to start your project.");
 
-	HTTPServerSettings httpSettings = new HTTPServerSettings();
-	httpSettings.bindAddress = ["::"];
-	httpSettings.bindPort = 8002;
+	auto resp = get(rcpEndpoint);
+	writeln(resp);
+	
 
-	URLRouter router = new URLRouter();
+	// HTTPServerSettings httpSettings = new HTTPServerSettings();
+	// httpSettings.bindAddresses = ["::"];
+	// httpSettings.port = 8002;
 
-	router.get("/", &homeHandler);
+	// URLRouter router = new URLRouter();
 
-	listenHTTP(router, httpSettings);
+	// router.get("/", &homeHandler);
 
-	runApplication();
+	// listenHTTP(httpSettings, router);
+
+	// runApplication();
 }
