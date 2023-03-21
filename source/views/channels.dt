@@ -36,9 +36,11 @@ html
 							p Topic
 					- import types.channel;
 					- foreach(Channel channel; channels)
+						- import std.string : strip;
+						- string channelNameWithoutHash = strip(channel.getName(), "#");
 						tr
 							td
-								a(href="/channelinfo?name=#{channel.getName()}")
+								a(href="/channelinfo?name=#{channelNameWithoutHash}")
 									p #{channel.getName()}
 							td
 								p #{channel.getUsers()}
