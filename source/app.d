@@ -1,5 +1,21 @@
 import std.stdio;
 
+// TODO: Import gogga and use it for logging
+
+import gogga;
+
+private GoggaLogger logger;
+
+static this()
+{
+	logger = new GoggaLogger();
+	logger.enableDebug();
+
+	version(release)
+	{
+		logger.disableDebug();
+	}
+}
 import vibe.d;
 
 // TODO: Make configurable via environment variab;e
@@ -33,7 +49,7 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 	/* Extract the parameters */
 	auto params = req.query;
 
-	writeln(params);
+	logger.debug_(params);
 
 	/* Extract name parameter */
 	if(params.get("name") !is null) // TODO: Ensure channel name is not empty string
@@ -53,6 +69,7 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 	/* If not found, throw an error */
 	else
 	{
+		logger.error("The channel name parameter is not present");
 		throw new HTTPStatusException(HTTPStatus.badRequest, "Missing channel name parameter");
 	}
 

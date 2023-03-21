@@ -4,10 +4,13 @@
 	],
 	"copyright": "Copyright © 2023, Tristan B. Velloza Kildaire",
 	"dependencies": {
+		"gogga": "~>2.1.18",
 		"vibe-d": "~>0.9.5"
 	},
 	"description": "A looking glass into unrealircd",
 	"license": "AGPL-3",
 	"name": "openbnet",
-	"stringImportPaths": ["source/views"]
+	"stringImportPaths": [
+		"source/views"
+	]
 }
