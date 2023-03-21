@@ -2,7 +2,7 @@ doctype html
 html
 	head
 		title #{network.name}
-
+		link(rel="stylesheet" href="/assets/table.css")
 	body
 		center
 			img(src="/assets/open_bnet_banner.png", width=325.75, height=125)
