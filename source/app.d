@@ -44,6 +44,19 @@ void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 	resp.render!("channels.dt", network, channels);
 }
 
+import types.server;
+
+void serverListHandler(HTTPServerRequest req, HTTPServerResponse resp)
+{
+	// TODO: Add actual channel fetch here
+	Server[] servers = getDummyServers();
+
+	// TODO: Add actual network here
+	Network network = new Network();
+
+	resp.render!("servers.dt", network, servers);
+}
+
 void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
 	// TODO: Add actual network here
@@ -115,6 +128,7 @@ void main()
 	router.get("/", &homeHandler);
 	router.get("/channels", &channelListHandler);
 	router.get("/channelinfo", &channelInfoHandler);
+	router.get("/servers", &serverListHandler);
 
 	// Setup serving of static files
 	router.get("/assets/table.css", serveStaticFile("assets/table.css"));

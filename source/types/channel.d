@@ -138,7 +138,9 @@ public class Channel
 
 unittest
 {
-    JSONValue rcpDataIn = parseJSON(channelInfo);
+    import testInputs : channelInfoTest = channelInfo;
+    
+    JSONValue rcpDataIn = parseJSON(channelInfoTest);
 
     ChannelInfo channelInfo = ChannelInfo.fromJSON(rcpDataIn["result"]["channel"]);
 }

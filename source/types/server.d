@@ -2,11 +2,26 @@ module types.server;
 
 import std.json;
 
-version(unittest)
-{
+// version(unittest)
+// {
     import std.stdio;
     import testInputs : serverList;
+// }
+
+public Server[] getDummyServers()
+{
+    JSONValue rcpDataIn = parseJSON(serverList);
+
+    Server[] servers;
+    foreach(JSONValue curServer; rcpDataIn["result"]["list"].array())
+    {
+        servers ~= Server.fromJSON(curServer);
+    }
+
+    return servers;
 }
+
+
 
 unittest
 {
@@ -43,7 +58,8 @@ public class Server
     private DateTime boot_time;
     private bool synced, ulined;
 
-    private string software, protocol;
+    private string software;
+    private long protocol;
 
 
     private this()
@@ -63,7 +79,10 @@ public class Server
         /* Extract all information from the `server {}` block */
         JSONValue serverBlock = jsonIn["server"];
         server.infoString = serverBlock["info"].str();
-        server.uplinkServer = serverBlock["uplink"].str();
+        if("uplinkServer" in serverBlock.object())
+        {
+            server.uplinkServer = serverBlock["uplink"].str();
+        }
         server.num_users = serverBlock["num_users"].integer();
 
         // Strip off the .XXXZ
@@ -71,14 +90,19 @@ public class Server
         long dotPos = indexOf(bootTime, ".");
         bootTime = bootTime[0..dotPos];
         server.boot_time = DateTime.fromISOExtString(bootTime);
-
-        server.synced = serverBlock["synced"].boolean();
-        server.ulined = serverBlock["ulined"].boolean();
+        if("synced" in serverBlock.object())
+        {
+            server.synced = serverBlock["synced"].boolean();
+        }
+        if("ulined" in serverBlock.object())
+        {
+            server.ulined = serverBlock["ulined"].boolean();
+        }
 
         /* Extract all information from the `feature {}` block within the `server {}` block */
         JSONValue featureBlock = serverBlock["features"];
         server.software = featureBlock["software"].str();
-        server.protocol = featureBlock["protocol"].str();
+        server.protocol = featureBlock["protocol"].integer();
         
 
 
