@@ -26,7 +26,11 @@ html
 						th
 							p Users
 						th
+							p Modes
+						th
 							p Messages
+						th
+							p Created
 						th
 							p Topic
 					- import types.channel;
@@ -36,6 +40,10 @@ html
 								p #{channel.getName()}
 							td
 								p #{channel.getUsers()}
+							td
+								p #{channel.getModes()}
+							td
+								p #{channel.getCreationTime().toString()}
 							td
 								// - channel.getMessages()();
 							td

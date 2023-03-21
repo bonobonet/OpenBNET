@@ -114,6 +114,11 @@ public class Channel
         return name;
     }
 
+    public string getModes()
+    {
+        return modes;
+    }
+
     public long getUsers()
     {
         return userCount;
@@ -122,6 +127,11 @@ public class Channel
     public string getTopic()
     {
         return topic;
+    }
+
+    public DateTime getCreationTime()
+    {
+        return creationTime;
     }
 }
 
