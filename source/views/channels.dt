@@ -38,7 +38,8 @@ html
 					- foreach(Channel channel; channels)
 						tr
 							td
-								p #{channel.getName()}
+								a(href="/channelinfo?name=#{channel.getName()}")
+									p #{channel.getName()}
 							td
 								p #{channel.getUsers()}
 							td

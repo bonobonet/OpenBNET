@@ -1,0 +1,40 @@
+<html>
+<head>
+	<title>404 | {{ networkName }}</title>
+</head>
+<body>
+	<center>
+		<img src="/assets/{{ networkLogo }}" width=325.75 height=125>
+		<h1>{{ networkName }}</h1>
+		<p>{{ description }}</p>
+
+		<hr>
+		<p><a href="/">Home</a> | <a href="/channels">Channel directory</a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+		<hr>
+
+		<h3>Error</h3>
+		<p>{{ code }}</p>
+	</center>
+
+	center
+		div
+			h1 Looks like you broke something
+			br
+			h2 #{error.message} (#{error.code})
+			- if(error.code == 403)
+				p This normally occurs if you are logged out
+			br
+			br
+			h3 On action 
+				code #{request}
+			br
+			- if(!(error.exception is null))
+				h3 Here's the log if it helps
+				p #{error.exception}
+			- else
+				h3 No further log available
+
+
+
+</body>
+</html>
