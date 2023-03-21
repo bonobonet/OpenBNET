@@ -31,7 +31,9 @@ void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
 	/* Extract the parameters */
-	auto params = req.params;
+	auto params = req.query;
+
+	writeln(params);
 
 	/* Extract name parameter */
 	if(params.get("name") !is null)
@@ -39,6 +41,9 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 		/* Fetch the channel info */
 		string channelName = params["name"];
 		ChannelInfo channelInfo = getDummyChannelInfo(channelName);
+
+
+		resp.render!("channelinfo.dt", channelInfo);
 
 	}
 	/* If not found, throw an error */
