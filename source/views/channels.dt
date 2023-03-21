@@ -37,7 +37,9 @@ html
 					- import types.channel;
 					- foreach(Channel channel; channels)
 						- import std.string : strip;
+						<!-- TODO: Escape the hashes -->
 						- string channelNameWithoutHash = strip(channel.getName(), "#");
+						
 						tr
 							td
 								a(href="/channelinfo?name=#{channelNameWithoutHash}")

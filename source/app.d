@@ -36,10 +36,14 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 	writeln(params);
 
 	/* Extract name parameter */
-	if(params.get("name") !is null)
+	if(params.get("name") !is null) // TODO: Ensure channel name is not empty string
 	{
+		/* Extract the channel name */
+		string channelName = strip(params["name"]);
+
+		
+
 		/* Fetch the channel info */
-		string channelName = params["name"];
 		ChannelInfo channelInfo = getDummyChannelInfo(channelName);
 
 
