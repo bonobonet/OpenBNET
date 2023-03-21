@@ -51,6 +51,10 @@ void main()
 	router.get("/", &homeHandler);
 	router.get("/channels", &channelListHandler);
 
+	// Setup serving of static files
+	router.get("/assets/table.css", serveStaticFile("assets/table.css"));
+	router.get("/assets/open_bnet_banner.png", serveStaticFile("assets/open_bnet_banner.png"));
+
 	listenHTTP(httpSettings, router);
 
 	runApplication();
