@@ -154,6 +154,45 @@ public ChannelInfo getDummyChannelInfo(string channelName)
     return channelInfo;
 }
 
+public class MemberInfo
+{
+    private string name;
+    private string id;
+
+   
+    private this()
+    {
+
+    }
+    
+    
+
+    public static MemberInfo fromJSON(JSONValue jsonIn)
+    {
+        MemberInfo info = new MemberInfo();
+
+        info.name = jsonIn["name"].str();
+        info.id = jsonIn["id"].str();
+
+        return info;
+    }
+
+    public string getName()
+    {
+        return name;
+    }
+
+    public string getID()
+    {
+        return id;
+    }
+
+    public override string toString()
+    {
+        return name~" ("~id~")";
+    }
+}
+
 /** 
  * Represents information that is retrived via `channel.get`
  * which means that this contains more in-depth information
@@ -161,11 +200,7 @@ public ChannelInfo getDummyChannelInfo(string channelName)
  */
 public class ChannelInfo
 {
-    public struct MemberInfo
-    {
-        public string name;
-        public string id;
-    }
+    
 
     private string[] bans;
     private string[] banExemptions;
@@ -202,6 +237,12 @@ public class ChannelInfo
             channelInfo.inviteExceptions ~= curInviteException.str();
         }
 
+        JSONValue[] membersInfoJSON = jsonIn["members"].array();
+        foreach(JSONValue curMemberInfo; membersInfoJSON)
+        {
+            channelInfo.members ~= MemberInfo.fromJSON(curMemberInfo);
+        }
+
         return channelInfo;
     }
 
@@ -218,5 +259,10 @@ public class ChannelInfo
     public string[] getInviteExceptions()
     {
         return inviteExceptions;
+    }
+
+    public MemberInfo[] getMembers()
+    {
+        return members;
     }
 }

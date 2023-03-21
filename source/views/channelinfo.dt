@@ -33,7 +33,7 @@ html
                         th
                             p Invite exemptions
                         th
-                            p Topic
+                            p Members
                     
                     tr
                         td
@@ -53,4 +53,7 @@ html
                                 - foreach(string ban; channelInfo.getInviteExceptions())
                                     li #{ban}
                         td
-                            p TODO
+                            ul
+                                - import types.channel : MemberInfo;
+                                - foreach(MemberInfo member; channelInfo.getMembers())
+                                    li #{member}
