@@ -56,8 +56,10 @@ void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
 void errorHandler(HTTPServerRequest req, HTTPServerResponse resp, HTTPServerErrorInfo error)
 {
 	// TODO: FInish error page
+	Network network = new Network();
+
 	auto request = req;
-	resp.render!("error.dt", error, request);
+	resp.render!("error.dt", error, request, network);
 }
 
 void main()
