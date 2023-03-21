@@ -154,7 +154,11 @@ public ChannelInfo getDummyChannelInfo(string channelName)
     return channelInfo;
 }
 
-
+/** 
+ * Represents information that is retrived via `channel.get`
+ * which means that this contains more in-depth information
+ * for the given channel
+ */
 public class ChannelInfo
 {
     public struct MemberInfo
