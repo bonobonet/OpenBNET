@@ -181,8 +181,42 @@ public class ChannelInfo
     {
         ChannelInfo channelInfo = new ChannelInfo();
 
+        /* Parse bans array */
+        JSONValue[] bansJSON = jsonIn["bans"].array();
+        foreach(JSONValue curBan; bansJSON)
+        {
+            channelInfo.bans ~= curBan.str();
+        }
 
+        /* Parse ban exemptions array */
+        JSONValue[] banExemptionsJSON = jsonIn["ban_exemptions"].array();
+        foreach(JSONValue curBan; banExemptionsJSON)
+        {
+            channelInfo.banExemptions ~= curBan.str();
+        }
+
+        /* Parse invite exceptions array */
+        JSONValue[] inviteExceptionsJSON = jsonIn["invite_exceptions"].array();
+        foreach(JSONValue curInviteException; inviteExceptionsJSON)
+        {
+            channelInfo.inviteExceptions ~= curInviteException.str();
+        }
 
         return channelInfo;
+    }
+
+    public string[] getBans()
+    {
+        return bans;
+    }
+
+    public string[] getBanExemptions()
+    {
+        return banExemptions;
+    }
+
+    public string[] getInviteExceptions()
+    {
+        return inviteExceptions;
     }
 }

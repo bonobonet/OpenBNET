@@ -36,16 +36,19 @@ import types.channel;
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
 	// TODO: Add actual channel fetch here
-	
 	Channel[] channels = getDummyChannels();
 
-
+	// TODO: Add actual network here
 	Network network = new Network();
+
 	resp.render!("channels.dt", network, channels);
 }
 
 void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
+	// TODO: Add actual network here
+	Network network = new Network();
+
 	/* Extract the parameters */
 	auto params = req.query;
 
@@ -63,7 +66,7 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 		ChannelInfo channelInfo = getDummyChannelInfo(channelName);
 
 
-		resp.render!("channelinfo.dt", channelInfo);
+		resp.render!("channelinfo.dt", channelInfo, network);
 
 	}
 	/* If not found, throw an error */
