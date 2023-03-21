@@ -15,11 +15,12 @@ public class Network
 
 // TODO: A fetch channel should populate with users list inside it
 
+import types.channel;
 
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
 	// TODO: Add actual channel fetch here
-	import types.channel;
+	
 	Channel[] channels = getDummyChannels();
 
 
@@ -35,7 +36,10 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 	/* Extract name parameter */
 	if(params.get("name") !is null)
 	{
+		/* Fetch the channel info */
 		string channelName = params["name"];
+		ChannelInfo channelInfo = getDummyChannelInfo(channelName);
+
 	}
 	/* If not found, throw an error */
 	else

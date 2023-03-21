@@ -143,6 +143,18 @@ unittest
     ChannelInfo channelInfo = ChannelInfo.fromJSON(rcpDataIn["result"]["channel"]);
 }
 
+
+public ChannelInfo getDummyChannelInfo(string channelName)
+{
+    import testInputs : channelInfoTest = channelInfo;
+    JSONValue rcpDataIn = parseJSON(channelInfoTest);
+
+    ChannelInfo channelInfo = ChannelInfo.fromJSON(rcpDataIn["result"]["channel"]);
+
+    return channelInfo;
+}
+
+
 public class ChannelInfo
 {
     public struct MemberInfo
