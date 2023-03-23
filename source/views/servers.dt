@@ -12,7 +12,7 @@ html
             <p>{{ description }}</p>
 
             <hr>
-            <p><a href="/">Home</a> | <a href="/channels"><b>Channel directory</b></a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+            <p><a href="/">Home</a> | <a href="/channels">Channel directory</a> | <a href="/servers"><b>Servers</b></a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
             <hr>
 
             <div>
@@ -40,6 +40,8 @@ html
                             p boot time
                         th
                             p synced/ulined status
+                        th
+                            p software (version)
                     
                     - import types.server;
                     - foreach(Server curServer; servers)
@@ -62,3 +64,5 @@ html
                                 p #{curServer.getBootTime()}
                             td
                                 p #{curServer.getSynced()}/#{curServer.getUlined()}
+                            td
+                                p #{curServer.getSoftware()} (#{curServer.getProtocol()})

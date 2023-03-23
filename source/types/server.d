@@ -158,4 +158,14 @@ public class Server
     {
         return ulined;
     }
+
+    public string getSoftware()
+    {
+        return software;
+    }
+
+    public long getProtocol()
+    {
+        return protocol;
+    }
 }
