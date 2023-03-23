@@ -1,8 +1,6 @@
 doctype html
 html
-	head
-		title #{network.name}
-		link(rel="stylesheet", href="/assets/table.css")
+	include header.dt
 	body
 		center
 			include banner.dt
