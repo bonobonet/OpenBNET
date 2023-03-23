@@ -94,7 +94,9 @@ void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
 	// TODO: Add actual network here
 	Network network = new Network();
 
-	resp.render!("home.dt", network);
+	Stats stats = getDummyStats();
+
+	resp.render!("home.dt", network, stats);
 }
 
 void errorHandler(HTTPServerRequest req, HTTPServerResponse resp, HTTPServerErrorInfo error)

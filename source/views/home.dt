@@ -13,19 +13,14 @@ body
             <p><i>General overview of the network</i></p>
             <br>
 
-            p There are BRUH many users online with BRUH many servers
-            pre PUT A MAP HERE           
+            p There are <b>#{stats.getUsers()}</b> many users online with <b>#{stats.getServers()}</b> many servers
+            p with a total of <b>#{stats.getChannels()}</b> channels on the network
 
             <br>
 
-            <h2>Network state</h2>
-            <p><i>Some information regarding the global state of the network</i></p>
-            <br>
+            <h3>Network map</h3>
 
-            <p><b>Total messages:</b> {{ messages }} </p>
-            <p><b>Operators:</b> {{ operators }} </p>
-            <p><b>Clients:</b> {{ clients }} </p>
-            <p><b>Channels:</b> {{ channels }} </p>
+            pre PUT A MAP HERE
         </div>
     </center>
 

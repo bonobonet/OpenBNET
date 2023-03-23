@@ -405,3 +405,34 @@ string channelInfo = `
     }
 }
 `;
+
+
+string stats_get = `
+{
+  "jsonrpc": "2.0",
+  "method": "stats.get",
+  "id": 123,
+  "result": {
+    "server": {
+      "total": 4,
+      "ulined": 0
+    },
+    "user": {
+      "total": 18,
+      "ulined": 0,
+      "oper": 1,
+      "record": 22
+    },
+    "channel": {
+      "total": 31
+    },
+    "server_ban": {
+      "total": 11,
+      "server_ban": 3,
+      "spamfilter": 0,
+      "name_ban": 7,
+      "server_ban_exception": 1
+    }
+  }
+}
+`;
