@@ -4,7 +4,8 @@ html
     body
         center
             include banner.dt
-            
+
+            <hr>
             <p><a href="/">Home</a> | <a href="/channels">Channel directory</a> | <a href="/servers"><b>Servers</b></a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
             <hr>
 
