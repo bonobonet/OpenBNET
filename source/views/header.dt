@@ -1,0 +1,3 @@
+head
+    title #{network.name}
+    link(rel="stylesheet", href="/assets/table.css")
