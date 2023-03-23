@@ -22,7 +22,7 @@ static this()
 // TODO: Make configurable via environment variab;e
 string rpcEndpoint = "https://apiuser:password@127.0.0.1:8001/api";
 
-// import std.net.curl;
+import std.net.curl : post;
 
 public class Network
 {
@@ -33,7 +33,47 @@ public class Network
 
 // TODO: A fetch channel should populate with users list inside it
 
+private Stats fetchStats()
+{
+	Stats stats;
 
+	/** 
+	 * Make the request
+	 *
+	 * `"jsonrpc": "2.0", "method": "stats.get", "params": {"channel":"#general"}, "id": 123`
+	 */
+	string[string] postData;
+	postData["jsonrpc"] = "2.0";
+	postData["method"] = "stats.get";
+
+	import std.json;
+	JSONValue params;
+	params["channel"] = "#general";
+	postData["jsonrpc"] = params.toString();
+
+	postData["id"] = JSONValue(123).toString();
+
+	string response = cast(string)post(rpcEndpoint, postData);
+
+	/**
+	 * Parse the response
+	 */
+	JSONValue responseJSON = parseJSON(response);
+	stats = Stats.fromJSON(responseJSON);
+
+	return stats;
+}
+
+// /** 
+// * Parse the response
+// */
+// JSONValue responseJSON = parseJSON(response);
+// foreach(JSONValue curChannel; responseJSON["result"]["list"].array())
+// {
+// fetchedChannels ~= Channel.fromJSON(curChannel);
+// }
+
+// return fetchedChannels;
 
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
