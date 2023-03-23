@@ -28,7 +28,7 @@ html
 							p Created
 						th
 							p Topic
-					- import types.channel;
+					- import openbnet.types.channel;
 					- foreach(Channel channel; channels)
 						- import std.string : strip;
 						<!-- TODO: Escape the hashes -->

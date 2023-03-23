@@ -48,6 +48,6 @@ html
                                     li #{ban}
                         td
                             ul
-                                - import types.channel : MemberInfo;
+                                - import openbnet.types.channel : MemberInfo;
                                 - foreach(MemberInfo member; channelInfo.getMembers())
                                     li #{member}

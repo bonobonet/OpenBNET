@@ -37,7 +37,7 @@ html
                         th
                             p software (version)
                     
-                    - import types.server;
+                    - import openbnet.types.server;
                     - foreach(Server curServer; servers)
                         tr
                             td
