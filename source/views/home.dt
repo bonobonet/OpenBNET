@@ -1,30 +1,25 @@
-<html>
-include header.dt
-body
-    center
-        include banner.dt
+doctype html
+html
+    include header.dt
+    body
+        center
+            include banner.dt
 
-        <hr>
-        <p><a href="/"><b>Home</b></a> | <a href="/channels">Channel directory</a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
-        <hr>
+            <hr>
+            <p><a href="/"><b>Home</b></a> | <a href="/channels">Channel directory</a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+            <hr>
 
-        <div>
-            <h2>Home</h2>
-            <p><i>General overview of the network</i></p>
-            <br>
+            <div>
+                <h2>Home</h2>
+                <p><i>General overview of the network</i></p>
+                <br>
 
-            p There are <b>#{stats.getUsers()}</b> many users online with <b>#{stats.getServers()}</b> many servers
-            p with a total of <b>#{stats.getChannels()}</b> channels on the network
+                p There are <b>#{stats.getUsers()}</b> many users online with <b>#{stats.getServers()}</b> many servers
+                p with a total of <b>#{stats.getChannels()}</b> channels on the network
 
-            <br>
+                <br>
 
-            <h3>Network map</h3>
+                <h3>Network map</h3>
 
-            pre PUT A MAP HERE
-        </div>
-    </center>
-
-
-
-</body>
-</html>
+                pre PUT A MAP HERE
+            </div>
