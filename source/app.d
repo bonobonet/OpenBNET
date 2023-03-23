@@ -134,6 +134,7 @@ void main()
 	// Setup serving of static files
 	router.get("/assets/table.css", serveStaticFile("assets/table.css"));
 	router.get("/assets/open_bnet_banner.png", serveStaticFile("assets/open_bnet_banner.png"));
+	router.get("/favicon.ico", serveStaticFile("assets/b_hash_logo.png"));
 
 	listenHTTP(httpSettings, router);
 
