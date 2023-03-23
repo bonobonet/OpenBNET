@@ -94,9 +94,10 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 
 void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
-	
+	// TODO: Add actual network here
+	Network network = new Network();
 
-	resp.writeBody("Hello");
+	resp.render!("home.dt", network);
 }
 
 void errorHandler(HTTPServerRequest req, HTTPServerResponse resp, HTTPServerErrorInfo error)

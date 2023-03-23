@@ -1,0 +1,41 @@
+<html>
+head
+    title #{network.name}
+    link(rel="stylesheet", href="/assets/table.css")
+body
+    center
+        <!-- Make this configurable later -->
+        img(src="/assets/open_bnet_banner.png", width=325.75, height=125)
+        h1(#{network.name})
+
+        <p>{{ description }}</p>
+
+        <hr>
+        <p><a href="/"><b>Home</b></a> | <a href="/channels">Channel directory</a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+        <hr>
+
+        <div>
+            <h2>Home</h2>
+            <p><i>General overview of the network</i></p>
+            <br>
+
+            p There are BRUH many users online with BRUH many servers
+            pre PUT A MAP HERE           
+
+            <br>
+
+            <h2>Network state</h2>
+            <p><i>Some information regarding the global state of the network</i></p>
+            <br>
+
+            <p><b>Total messages:</b> {{ messages }} </p>
+            <p><b>Operators:</b> {{ operators }} </p>
+            <p><b>Clients:</b> {{ clients }} </p>
+            <p><b>Channels:</b> {{ channels }} </p>
+        </div>
+    </center>
+
+
+
+</body>
+</html>
