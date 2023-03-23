@@ -1,7 +1,6 @@
-import std.stdio;
-
-// TODO: Import gogga and use it for logging
-
+import types;
+import vibe.d;
+import std.functional : toDelegate;
 import gogga;
 
 private GoggaLogger logger;
@@ -16,7 +15,7 @@ static this()
 		logger.disableDebug();
 	}
 }
-import vibe.d;
+
 
 // TODO: Make configurable via environment variab;e
 string rpcEndpoint = "https://apiuser:password@127.0.0.1:8001/api";
@@ -31,7 +30,7 @@ public class Network
 
 // TODO: A fetch channel should populate with users list inside it
 
-import types.channel;
+
 
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
@@ -43,8 +42,6 @@ void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 
 	resp.render!("channels.dt", network, channels);
 }
-
-import types.server;
 
 void serverListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
@@ -111,7 +108,7 @@ void errorHandler(HTTPServerRequest req, HTTPServerResponse resp, HTTPServerErro
 
 void main()
 {
-	writeln("Edit source/app.d to start your project.");
+	logger.info("Edit source/app.d to start your project.");
 
 	// auto resp = get(rpcEndpoint);
 	// writeln(resp);
@@ -121,7 +118,7 @@ void main()
 	httpSettings.bindAddresses = ["::"];
 	httpSettings.port = 8002;
 
-	import std.functional : toDelegate;
+	
 	httpSettings.errorPageHandler = toDelegate(&errorHandler);
 
 	URLRouter router = new URLRouter();
