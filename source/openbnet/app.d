@@ -33,6 +33,12 @@ public class Network
 
 // TODO: A fetch channel should populate with users list inside it
 
+/** 
+ * Fetches the statistics information by making the `stats.get`
+ * request and then parsing the results
+ *
+ * Returns: an instance of Stats containing the information
+ */
 private Stats fetchStats()
 {
 	Stats stats;
