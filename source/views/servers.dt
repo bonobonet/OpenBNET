@@ -23,28 +23,42 @@ html
                 table(border="1")
                     tr
                         th()
-                            p Channel
+                            p name
                         th
-                            p Users
+                            p sid
                         th
-                            p Bans
+                            p hostname
                         th
-                            p Ban exemptions
+                            p details
                         th
-                            p Invite exemptions
+                            p users
                         th
-                            p Members
+                            p info
+                        th
+                            p uplink
+                        th
+                            p boot time
+                        th
+                            p synced/ulined status
                     
-                    tr
-                        td
-                            p TODO
-                        td
-                            p TODO
-                        td
-                            p TODO
-                        td
-                            p TODO
-                        td
-                            p TODO
-                        td
-                            p TODO
+                    - import types.server;
+                    - foreach(Server curServer; servers)
+                        tr
+                            td
+                                p #{curServer.getName()}
+                            td
+                                p #{curServer.getSID()}
+                            td
+                                p #{curServer.getHostname()}
+                            td
+                                p #{curServer.getDetails()}
+                            td
+                                p #{curServer.getUserCount()}
+                            td
+                                p #{curServer.getInfo()}
+                            td
+                                p #{curServer.getUplink()}
+                            td
+                                p #{curServer.getBootTime()}
+                            td
+                                p #{curServer.getSynced()}/#{curServer.getUlined()}

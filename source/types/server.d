@@ -108,4 +108,54 @@ public class Server
 
         return server;
     }
+
+    public string getName()
+    {
+        return name;
+    }
+
+    public string getSID()
+    {
+        return sid;
+    }
+
+    public string getHostname()
+    {
+        return hostname;
+    }
+
+    public string getDetails()
+    {
+        return details;
+    }
+
+    public long getUserCount()
+    {
+        return num_users;
+    }
+
+    public string getInfo()
+    {
+        return infoString;
+    }
+
+    public string getUplink()
+    {
+        return uplinkServer;
+    }
+
+    public DateTime getBootTime()
+    {
+        return boot_time;
+    }
+
+    public bool getSynced()
+    {
+        return synced;
+    }
+
+    public bool getUlined()
+    {
+        return ulined;
+    }
 }
