@@ -46,7 +46,7 @@ private Stats fetchStats()
 	/** 
 	 * Make the request
 	 *
-	 * `"jsonrpc": "2.0", "method": "stats.get", "params": {"channel":"#general"}, "id": 123`
+	 * `"jsonrpc": "2.0", "method": "stats.get", "parans" : {}, "id": 123`
 	 */
 	string[string] postData;
 	postData["jsonrpc"] = "2.0";
@@ -54,8 +54,8 @@ private Stats fetchStats()
 
 	import std.json;
 	JSONValue params;
-	params["channel"] = "#general";
-	postData["jsonrpc"] = params.toString();
+	postData["params"] = params.toString();
+
 
 	postData["id"] = JSONValue(123).toString();
 
@@ -70,16 +70,53 @@ private Stats fetchStats()
 	return stats;
 }
 
-// /** 
-// * Parse the response
-// */
-// JSONValue responseJSON = parseJSON(response);
-// foreach(JSONValue curChannel; responseJSON["result"]["list"].array())
-// {
-// fetchedChannels ~= Channel.fromJSON(curChannel);
-// }
+private Channel[] fetchChannels()
+{
+	Channel[] fetchedChannels;
 
-// return fetchedChannels;
+	/** 
+	 * Make the request
+	 *
+	 * `"jsonrpc": "2.0", "method": "channel.list", "params": {}, "id": 123`
+	 */
+	string[string] postData;
+	postData["jsonrpc"] = "2.0";
+	postData["method"] = "stats.get";
+
+	import std.json;
+	JSONValue params;
+	postData["params"] = params.toString();
+
+	postData["id"] = JSONValue(123).toString();
+
+	string response = cast(string)post(rpcEndpoint, postData);
+
+	/**
+	 * Parse the response
+	 */
+	JSONValue responseJSON = parseJSON(response);
+	foreach(JSONValue curChannel; responseJSON["result"]["list"].array())
+	{
+		fetchedChannels ~= Channel.fromJSON(curChannel);
+	}
+
+
+	return fetchedChannels;
+}
+
+// /** 
+// * Make the request
+// *
+// * `"jsonrpc": "2.0", "method": "channel.list", "id": 123`
+// */
+// string[string] postData;
+// postData["jsonrpc"] = "2.0";
+// postData["method"] = "stats.get";
+
+// import std.json;
+// JSONValue params;
+// params["channel"] = "#general";
+// postData["params"] = params.toString();
 
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
