@@ -80,7 +80,7 @@ private Channel[] fetchChannels()
 	 */
 	string[string] postData;
 	postData["jsonrpc"] = "2.0";
-	postData["method"] = "stats.get";
+	postData["method"] = "channel.list";
 
 	import std.json;
 	JSONValue params;
@@ -89,8 +89,8 @@ private Channel[] fetchChannels()
 	postData["id"] = JSONValue(123).toString();
 
 
-	HTTP conn = HTTP();
-	conn.addRequestHeader("Content-Type", "application/json");
+	// HTTP conn = HTTP();
+	// conn.addRequestHeader("Content-Type", "application/json");
 	
 	string response = cast(string)post(rpcEndpoint, postData, conn);
 
