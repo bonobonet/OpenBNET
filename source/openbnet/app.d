@@ -99,6 +99,7 @@ private Channel[] fetchChannels()
 		fetchedChannels ~= Channel.fromJSON(curChannel);
 	}
 
+	logger.log("Got: "~responseJSON.toPrettyString());
 
 	return fetchedChannels;
 }
