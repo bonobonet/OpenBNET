@@ -106,24 +106,10 @@ private Channel[] fetchChannels()
 	return fetchedChannels;
 }
 
-// /** 
-// * Make the request
-// *
-// * `"jsonrpc": "2.0", "method": "channel.list", "id": 123`
-// */
-// string[string] postData;
-// postData["jsonrpc"] = "2.0";
-// postData["method"] = "stats.get";
-
-// import std.json;
-// JSONValue params;
-// params["channel"] = "#general";
-// postData["params"] = params.toString();
-
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
-	// TODO: Add actual channel fetch here
-	Channel[] channels = getDummyChannels();
+	/* Fetch the channels */
+	Channel[] channels = fetchChannels();
 
 	// TODO: Add actual network here
 	Network network = new Network();
