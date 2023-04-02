@@ -87,12 +87,8 @@ private Channel[] fetchChannels()
 	postData["params"] = params.toString();
 
 	postData["id"] = JSONValue(123).toString();
-
-
-	// HTTP conn = HTTP();
-	// conn.addRequestHeader("Content-Type", "application/json");
 	
-	string response = cast(string)post(rpcEndpoint, postData, conn);
+	string response = cast(string)post(rpcEndpoint, postData);
 
 	/**
 	 * Parse the response
