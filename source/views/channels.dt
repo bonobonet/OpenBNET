@@ -46,9 +46,10 @@ html
 							td
 								p #{channel.getModes()}
 							td
-								p #{channel.getCreationTime().toString()}
+								// p #{channel.getCreationTime().toString()}
 							td
 								// - channel.getMessages()();
+								p #{channel.getCreationTime().toString()}
 							td
 								p #{channel.getTopic()}
 						
