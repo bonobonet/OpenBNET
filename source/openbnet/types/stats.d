@@ -21,6 +21,9 @@ public class Stats
     {
         Stats stats = new Stats();
 
+        import std.stdio;
+        writeln(jsonIn);
+
         JSONValue serverBlock = jsonIn["server"];
         stats.serverCount = serverBlock["total"].integer();
 
