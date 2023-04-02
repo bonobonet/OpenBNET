@@ -4,6 +4,8 @@ import openbnet.types;
 import vibe.d;
 import std.functional : toDelegate;
 import gogga;
+import core.stdc.stdlib : getenv;
+import std.string : fromStringz;
 
 private GoggaLogger logger;
 
@@ -196,11 +198,16 @@ void errorHandler(HTTPServerRequest req, HTTPServerResponse resp, HTTPServerErro
 
 void main()
 {
-	logger.info("Edit source/app.d to start your project.");
+	logger.info("Welcome to OpenBNET!");
 
-	// auto resp = get(rpcEndpoint);
-	// writeln(resp);
 	
+	rpcEndpoint = cast(string)fromStringz(getenv("RPC_ENDPOINT"));
+	if(rpcEndpoint == null)
+	{
+		logger.error("The environment variable 'RPC_ENDPOINT' was not specified");
+		return;
+	}
+	logger.info("Using RPC endpoint '"~rpcEndpoint~"'");
 
 	HTTPServerSettings httpSettings = new HTTPServerSettings();
 	httpSettings.bindAddresses = ["::"];
