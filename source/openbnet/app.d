@@ -210,7 +210,7 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 		
 
 		/* Fetch the channel info */
-		ChannelInfo channelInfo = getDummyChannelInfo(channelName);
+		ChannelInfo channelInfo = fetchChannelInfo(channelName);
 
 
 		resp.render!("channelinfo.dt", channelInfo, network);
