@@ -35,7 +35,7 @@ html
 						- string channelNameWithoutHash;
 						- for(ulong i = 0; i < hashNumber; i++)
 							- channelNameWithoutHash~="%23";
-						- channelNameWithoutHash ~= strip("#", channel.getName());
+						- channelNameWithoutHash ~= strip(channel.getName(), "#");
 						
 						tr
 							td
