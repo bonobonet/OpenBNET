@@ -94,7 +94,9 @@ private Channel[] fetchChannels()
 	 * Parse the response
 	 */
 	JSONValue responseJSON = parseJSON(response);
-	logger.log("Got: "~responseJSON.toPrettyString());
+	// logger.log("Got: "~responseJSON.toPrettyString());
+	import std.stdio;
+	writeln(responseJSON.toPrettyString());
 	foreach(JSONValue curChannel; responseJSON["result"]["list"].array())
 	{
 		fetchedChannels ~= Channel.fromJSON(curChannel);
