@@ -71,6 +71,9 @@ public class Server
     {
         Server server = new Server();
 
+        import std.stdio;
+        writeln(jsonIn.toPrettyString());
+
         server.name = jsonIn["name"].str();
         server.sid = jsonIn["id"].str();
         server.hostname = jsonIn["hostname"].str();
