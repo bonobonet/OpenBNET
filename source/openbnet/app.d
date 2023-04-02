@@ -164,9 +164,9 @@ private ChannelInfo fetchChannelInfo(string channel)
 	
 	JSONValue params;
 	params["channel"] = channel;
-	postData["params"] = params.toString();
+	postData["params"] = params;
 
-	postData["id"] = JSONValue(123).toString();
+	postData["id"] = 123;
 
 	string response = cast(string)post(rpcEndpoint, postData.toPrettyString());
 
