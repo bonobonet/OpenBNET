@@ -6,7 +6,7 @@ import std.functional : toDelegate;
 import gogga;
 import core.stdc.stdlib : getenv;
 import std.string : fromStringz;
-import std.net.curl : post;
+import std.net.curl : post, HTTP;
 
 private GoggaLogger logger;
 
@@ -88,7 +88,11 @@ private Channel[] fetchChannels()
 
 	postData["id"] = JSONValue(123).toString();
 
-	string response = cast(string)post(rpcEndpoint, postData);
+
+	HTTP conn;
+	conn.addRequestHeader("Content-Type", "application/json");
+	
+	string response = cast(string)post(rpcEndpoint, postData, conn);
 
 	/**
 	 * Parse the response
