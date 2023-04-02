@@ -90,7 +90,7 @@ private Channel[] fetchChannels()
 	postData["id"] = JSONValue(123).toString();
 	
 
-	logger.log("Post data JSON: ", postData.toPrettyString());
+	// logger.log("Post data JSON: ", postData.toPrettyString());
 
 	string response = cast(string)post(rpcEndpoint, postData.toPrettyString());
 
