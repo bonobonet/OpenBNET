@@ -47,18 +47,18 @@ private Stats fetchStats()
 	 *
 	 * `"jsonrpc": "2.0", "method": "stats.get", "parans" : {}, "id": 123`
 	 */
-	string[string] postData;
+	import std.json;
+	JSONValue postData;
 	postData["jsonrpc"] = "2.0";
 	postData["method"] = "stats.get";
 
-	import std.json;
 	JSONValue params;
-	postData["params"] = params.toString();
+	postData["params"] = params;
 
 
-	postData["id"] = JSONValue(123).toString();
+	postData["id"] = 123;
 
-	string response = cast(string)post(rpcEndpoint, postData);
+	string response = cast(string)post(rpcEndpoint, postData.toPrettyString());
 
 	/**
 	 * Parse the response
@@ -156,7 +156,7 @@ private ChannelInfo fetchChannelInfo(string channel)
 	 *
 	 * `{"jsonrpc": "2.0", "method": "channel.get", "params": {"channel":"#<channel>"}, "id": 123}`
 	 */
-	 import std.json;
+	import std.json;
 	JSONValue postData;
 	postData["jsonrpc"] = "2.0";
 	postData["method"] = "channel.get";
