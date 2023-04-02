@@ -31,7 +31,7 @@ html
 					- import openbnet.types.channel;
 					- foreach(Channel channel; channels)
 						- import std.string : count, strip;
-						- ulong hashNumber = count("#", channel.getName());
+						- ulong hashNumber = count(channel.getName(), "#");
 						- string channelNameWithoutHash;
 						- for(ulong i = 0; i < hashNumber; i++)
 							- channelNameWithoutHash~="%23";
