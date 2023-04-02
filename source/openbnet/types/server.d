@@ -89,10 +89,14 @@ public class Server
         server.num_users = serverBlock["num_users"].integer();
 
         // Strip off the .XXXZ
-        string bootTime = serverBlock["boot_time"].str();
-        long dotPos = indexOf(bootTime, ".");
-        bootTime = bootTime[0..dotPos];
-        server.boot_time = DateTime.fromISOExtString(bootTime);
+        if(!serverBlock["boot_time"].isNull())
+        {
+            string bootTime = serverBlock["boot_time"].str();
+            long dotPos = indexOf(bootTime, ".");
+            bootTime = bootTime[0..dotPos];
+            server.boot_time = DateTime.fromISOExtString(bootTime);
+        }
+        
         if("synced" in serverBlock.object())
         {
             server.synced = serverBlock["synced"].boolean();
