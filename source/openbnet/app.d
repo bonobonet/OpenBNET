@@ -85,9 +85,9 @@ private Channel[] fetchChannels()
 
 	
 	JSONValue params;
-	postData["params"] = params.toString();
+	postData["params"] = params;
 
-	postData["id"] = JSONValue(123).toString();
+	postData["id"] = 123;
 	
 
 	// FIXME: Why does DLog crash with this?
