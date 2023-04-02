@@ -168,7 +168,8 @@ void homeHandler(HTTPServerRequest req, HTTPServerResponse resp)
 	// TODO: Add actual network here
 	Network network = new Network();
 
-	Stats stats = getDummyStats();
+	/* Fetch the network statistics */
+	Stats stats = fetchStats();
 
 	resp.render!("home.dt", network, stats);
 }
