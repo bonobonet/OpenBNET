@@ -63,8 +63,8 @@ private Stats fetchStats()
 	/**
 	 * Parse the response
 	 */
-	JSONValue responseJSON = parseJSON(response["result"]);
-	stats = Stats.fromJSON(responseJSON);
+	JSONValue responseJSON = parseJSON(response);
+	stats = Stats.fromJSON(responseJSON["result"]);
 
 	return stats;
 }
