@@ -22,13 +22,13 @@ public class Stats
         Stats stats = new Stats();
 
         JSONValue serverBlock = jsonIn["server"];
-        serverCount = serverBlock["total"].integer();
+        stats.serverCount = serverBlock["total"].integer();
 
         JSONValue userBlock = jsonIn["user"];
-        userCount = userBlock["total"].integer();
+        stats.userCount = userBlock["total"].integer();
 
         JSONValue channelBlock = jsonIn["channel"];
-        channelCount = channelBlock["total"].integer();
+        stats.channelCount = channelBlock["total"].integer();
 
         // TODO: Add parsing
 
