@@ -6,6 +6,7 @@ import std.functional : toDelegate;
 import gogga;
 import core.stdc.stdlib : getenv;
 import std.string : fromStringz;
+import std.net.curl : post;
 
 private GoggaLogger logger;
 
@@ -20,11 +21,7 @@ static this()
 	}
 }
 
-
-// TODO: Make configurable via environment variab;e
-string rpcEndpoint = "https://apiuser:password@127.0.0.1:8001/api";
-
-import std.net.curl : post;
+private string rpcEndpoint = "https://apiuser:password@127.0.0.1:8001/api";
 
 public class Network
 {
@@ -138,6 +135,38 @@ private Server[] fetchServers()
 
 
 	return fetchedServers;
+}
+
+private ChannelInfo fetchChannelInfo(string channel)
+{
+	ChannelInfo fetchedChannelInfo;
+
+	/** 
+	 * Make the request
+	 *
+	 * `{"jsonrpc": "2.0", "method": "channel.get", "params": {"channel":"#<channel>"}, "id": 123}`
+	 */
+	string[string] postData;
+	postData["jsonrpc"] = "2.0";
+	postData["method"] = "server.list";
+
+	import std.json;
+	JSONValue params;
+	params["channel"] = channel;
+	postData["params"] = params.toString();
+
+	postData["id"] = JSONValue(123).toString();
+
+	string response = cast(string)post(rpcEndpoint, postData);
+
+	/**
+	 * Parse the response
+	 */
+	JSONValue responseJSON = parseJSON(response);
+	fetchedChannelInfo = ChannelInfo.fromJSON(responseJSON["result"]["channel"]);
+
+
+	return fetchedChannelInfo;
 }
 
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
