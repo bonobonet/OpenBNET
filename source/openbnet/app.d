@@ -106,6 +106,40 @@ private Channel[] fetchChannels()
 	return fetchedChannels;
 }
 
+private Server[] fetchServers()
+{
+	Server[] fetchedServers;
+
+	/** 
+	 * Make the request
+	 *
+	 * `{"jsonrpc": "2.0", "method": "server.list", "params": {}, "id": 123}`
+	 */
+	string[string] postData;
+	postData["jsonrpc"] = "2.0";
+	postData["method"] = "server.list";
+
+	import std.json;
+	JSONValue params;
+	postData["params"] = params.toString();
+
+	postData["id"] = JSONValue(123).toString();
+
+	string response = cast(string)post(rpcEndpoint, postData);
+
+	/**
+	 * Parse the response
+	 */
+	JSONValue responseJSON = parseJSON(response);
+	foreach(JSONValue curServer; responseJSON["result"]["list"].array())
+	{
+		fetchedServers ~= Server.fromJSON(curServer);
+	}
+
+
+	return fetchedServers;
+}
+
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
 	/* Fetch the channels */
@@ -119,8 +153,8 @@ void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 
 void serverListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
-	// TODO: Add actual channel fetch here
-	Server[] servers = getDummyServers();
+	/* Fetch the servers */
+	Server[] servers = fetchServers();
 
 	// TODO: Add actual network here
 	Network network = new Network();
