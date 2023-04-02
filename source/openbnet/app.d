@@ -76,13 +76,14 @@ private Channel[] fetchChannels()
 	/** 
 	 * Make the request
 	 *
-	 * `"jsonrpc": "2.0", "method": "channel.list", "params": {}, "id": 123`
+	 * `"{jsonrpc": "2.0", "method": "channel.list", "params": {}, "id": 123}`
 	 */
-	string[string] postData;
+	import std.json;
+	JSONValue postData;
 	postData["jsonrpc"] = "2.0";
 	postData["method"] = "channel.list";
 
-	import std.json;
+	
 	JSONValue params;
 	postData["params"] = params.toString();
 
