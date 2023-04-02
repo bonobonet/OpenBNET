@@ -90,6 +90,7 @@ private Channel[] fetchChannels()
 	postData["id"] = JSONValue(123).toString();
 	
 
+	// FIXME: Why does DLog crash with this?
 	// logger.log("Post data JSON: ", postData.toPrettyString());
 
 	string response = cast(string)post(rpcEndpoint, postData.toPrettyString());
@@ -120,17 +121,18 @@ private Server[] fetchServers()
 	 *
 	 * `{"jsonrpc": "2.0", "method": "server.list", "params": {}, "id": 123}`
 	 */
-	string[string] postData;
+	import std.json;
+	JSONValue postData;
 	postData["jsonrpc"] = "2.0";
 	postData["method"] = "server.list";
 
-	import std.json;
+	
 	JSONValue params;
 	postData["params"] = params.toString();
 
 	postData["id"] = JSONValue(123).toString();
 
-	string response = cast(string)post(rpcEndpoint, postData);
+	string response = cast(string)post(rpcEndpoint, postData.toPrettyString());
 
 	/**
 	 * Parse the response
@@ -154,18 +156,19 @@ private ChannelInfo fetchChannelInfo(string channel)
 	 *
 	 * `{"jsonrpc": "2.0", "method": "channel.get", "params": {"channel":"#<channel>"}, "id": 123}`
 	 */
-	string[string] postData;
+	 import std.json;
+	JSONValue postData;
 	postData["jsonrpc"] = "2.0";
-	postData["method"] = "server.list";
+	postData["method"] = "channel.get";
 
-	import std.json;
+	
 	JSONValue params;
 	params["channel"] = channel;
 	postData["params"] = params.toString();
 
 	postData["id"] = JSONValue(123).toString();
 
-	string response = cast(string)post(rpcEndpoint, postData);
+	string response = cast(string)post(rpcEndpoint, postData.toPrettyString());
 
 	/**
 	 * Parse the response
