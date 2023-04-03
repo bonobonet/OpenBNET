@@ -51,4 +51,4 @@ html
                                 - import openbnet.types.channel : MemberInfo;
                                 - foreach(MemberInfo member; channelInfo.getMembers())
                                     li
-                                        a(href="/user?id=#{member.getId()}") #{member}
+                                        a(href="/user?id=#{member.getID()}") #{member}
