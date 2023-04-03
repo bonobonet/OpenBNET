@@ -12,3 +12,7 @@ html
             <div>
                 <h2>#{user.getRealname()}</h2>
                 <p><i>#{user.getNick()}@#{user.getVHost()}</i></p>
+
+                <b>Reputation</b>: #{user.getReputation()}
+                <b>Reputation</b>: #{user.getModes()}
+                <b>Server</b>: #{user.getServer()}

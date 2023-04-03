@@ -7,10 +7,11 @@ public class User
 {
     // TODO: Fields
     private string name, id, hostname, ip;
-    private string realname, vhost;
+    private string realname, vhost, servername, modes;
 
     private long clientPort, serverPort;
     private DateTime connectedSince, idleSince;
+    private long reputation;
     
 
 
@@ -30,6 +31,9 @@ public class User
         JSONValue userBlock = jsonIn["user"];
         user.realname = userBlock["realname"].str();
         user.vhost = userBlock["vhost"].str();
+        user.servername = userBlock["servername"].str();
+        user.reputation = userBlock["reputation"].integer();
+        user.modes = userBlock["modes"].str();
 
 
 
@@ -61,5 +65,18 @@ public class User
         return vhost;
     }
 
-   
+    public string getServer()
+    {
+        return servername;
+    }
+
+    public long getReputation()
+    {
+        return reputation;
+    }
+    
+    public string getModes()
+    {
+        return modes;
+    }
 }
