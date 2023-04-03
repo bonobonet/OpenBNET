@@ -209,7 +209,7 @@ private User fetchUserInfo(string user)
 	JSONValue responseJSON = parseJSON(response);
 	import std.stdio;
 	writeln(responseJSON.toPrettyString());
-	fetchedUserInfo = User.fromJSON(responseJSON["result"]["channel"]);
+	fetchedUserInfo = User.fromJSON(responseJSON["result"]["client"]);
 
 
 	return fetchedUserInfo;
