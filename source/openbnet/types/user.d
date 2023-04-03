@@ -27,6 +27,10 @@ public class User
         user.ip = jsonIn["ip"].str();
 
 
+        JSONValue userBlock = jsonIn["user"];
+        user.realname = userBlock["realname"].str();
+
+
 
         return user;
     }
