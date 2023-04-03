@@ -15,7 +15,7 @@ html
 
                 <b>Reputation</b>: #{user.getReputation()}
                 <br>
-                <b>Reputation</b>: #{user.getModes()}
+                <b>Modes</b>: #{user.getModes()}
                 <br>
                 <b>Server</b>: #{user.getServer()}
                 <br>
