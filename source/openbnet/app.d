@@ -208,7 +208,7 @@ private User fetchUserInfo(string user)
 	 */
 	JSONValue responseJSON = parseJSON(response);
 	import std.stdio;
-	writeln(responseJSON.toPrettyString());
+	logger.info(responseJSON.toPrettyString());
 	fetchedUserInfo = User.fromJSON(responseJSON["result"]["client"]);
 
 
