@@ -187,7 +187,7 @@ private User fetchUserInfo(string user)
 	/** 
 	 * Make the request
 	 *
-	 * `{"jsonrpc": "2.0", "method": "channel.get", "params": {"nick":"<user>"}, "id": 123}`
+	 * `{"jsonrpc": "2.0", "method": "user.get", "params": {"nick":"<user>"}, "id": 123}`
 	 */
 	import std.json;
 	JSONValue postData;
