@@ -180,6 +180,41 @@ private ChannelInfo fetchChannelInfo(string channel)
 	return fetchedChannelInfo;
 }
 
+private User fetchUserInfo(string user)
+{
+	User fetchedUserInfo;
+
+	/** 
+	 * Make the request
+	 *
+	 * `{"jsonrpc": "2.0", "method": "channel.get", "params": {"nick":"<user>"}, "id": 123}`
+	 */
+	import std.json;
+	JSONValue postData;
+	postData["jsonrpc"] = "2.0";
+	postData["method"] = "user.get";
+
+	
+	JSONValue params;
+	params["nick"] = user;
+	postData["params"] = params;
+
+	postData["id"] = 123;
+
+	string response = cast(string)post(rpcEndpoint, postData.toPrettyString());
+
+	/**
+	 * Parse the response
+	 */
+	JSONValue responseJSON = parseJSON(response);
+	import std.stdio;
+	writeln(responseJSON);
+	fetchedUserInfo = User.fromJSON(responseJSON["result"]["channel"]);
+
+
+	return fetchedUserInfo;
+}
+
 void channelListHandler(HTTPServerRequest req, HTTPServerResponse resp)
 {
 	/* Fetch the channels */
@@ -225,6 +260,41 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 
 
 		resp.render!("channelinfo.dt", channelInfo, network, channelName);
+
+	}
+	/* If not found, throw an error */
+	else
+	{
+		logger.error("The channel name parameter is not present");
+		throw new HTTPStatusException(HTTPStatus.badRequest, "Missing channel name parameter");
+	}
+
+	// TODO: Ensure we have a "name" parameter, if not throw an HTTP error
+}
+
+void userInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
+{
+	// TODO: Add actual network here
+	Network network = new Network();
+
+	/* Extract the parameters */
+	auto params = req.query;
+
+	logger.debug_(params);
+
+	/* Extract name parameter */
+	if(params.get("id") !is null) // TODO: Ensure id is not empty string
+	{
+		/* Extract the user id */
+		string userId = strip(params["id"]);
+
+		
+
+		/* Fetch the user info info */
+		User user = fetchUserInfo(userId);
+
+
+		resp.render!("user.dt", user, network);
 
 	}
 	/* If not found, throw an error */

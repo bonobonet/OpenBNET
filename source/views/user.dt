@@ -1,0 +1,13 @@
+doctype html
+html
+    include header.dt
+    body
+        center
+            include banner.dt
+
+            <hr>
+            <p><a href="/">Home</a> | <a href="/channels">Channel directory</a> | <a href="/servers">Servers</a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+            <hr>
+
+            <div>
+                <h2>#{user.getRealname()}</h2>
