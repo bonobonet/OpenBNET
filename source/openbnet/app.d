@@ -353,6 +353,7 @@ void main()
 	router.get("/channels", &channelListHandler);
 	router.get("/channelinfo", &channelInfoHandler);
 	router.get("/servers", &serverListHandler);
+	router.get("/user", &userInfoHandler);
 
 	// Setup serving of static files
 	router.get("/assets/table.css", serveStaticFile("assets/table.css"));
