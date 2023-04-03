@@ -7,7 +7,7 @@ public class User
 {
     // TODO: Fields
     private string name, id, hostname, ip;
-    private string realname;
+    private string realname, vhost;
 
     private long clientPort, serverPort;
     private DateTime connectedSince, idleSince;
@@ -29,6 +29,7 @@ public class User
 
         JSONValue userBlock = jsonIn["user"];
         user.realname = userBlock["realname"].str();
+        user.vhost = userBlock["vhost"].str();
 
 
 
@@ -38,6 +39,26 @@ public class User
     public string getRealname()
     {
         return realname;
+    }
+
+    public string getNick()
+    {
+        return name;
+    }
+
+    public string getIP()
+    {
+        return ip;
+    }
+
+    public string getHostname()
+    {
+        return hostname;
+    }
+
+    public string getVHost()
+    {
+        return vhost;
     }
 
    

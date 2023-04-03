@@ -11,3 +11,4 @@ html
 
             <div>
                 <h2>#{user.getRealname()}</h2>
+                <p><i>#{user.getNick()}@#{user.getVHost()}</i></p>
