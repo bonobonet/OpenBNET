@@ -10,7 +10,7 @@ html
             <hr>
 
             <div>
-                <h2>Channel info: #{channelInfo.getName()}</h2>
+                <h2>Channel info: #{channelName}</h2>
                 <p><i>A complete list of all channels available on the network.</i></p>
                 <br>
 

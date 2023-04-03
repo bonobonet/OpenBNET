@@ -224,7 +224,7 @@ void channelInfoHandler(HTTPServerRequest req, HTTPServerResponse resp)
 		ChannelInfo channelInfo = fetchChannelInfo(channelName);
 
 
-		resp.render!("channelinfo.dt", channelInfo, network);
+		resp.render!("channelinfo.dt", channelInfo, network, channelName);
 
 	}
 	/* If not found, throw an error */
