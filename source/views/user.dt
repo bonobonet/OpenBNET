@@ -14,5 +14,8 @@ html
                 <p><i>#{user.getNick()}@#{user.getVHost()}</i></p>
 
                 <b>Reputation</b>: #{user.getReputation()}
+                <br>
                 <b>Reputation</b>: #{user.getModes()}
+                <br>
                 <b>Server</b>: #{user.getServer()}
+                <br>
