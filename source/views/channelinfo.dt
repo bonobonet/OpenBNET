@@ -11,7 +11,7 @@ html
 
             <div>
                 <h2>Channel info: #{channelName}</h2>
-                <p><i>A complete list of all channels available on the network.</i></p>
+                <p><i>Detailed information on the channel</i></p>
                 <br>
 
                 table(border="1")
