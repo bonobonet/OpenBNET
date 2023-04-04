@@ -10,7 +10,7 @@ html
             <hr>
 
             <div>
-                <h2>#{user.getRealname()}</h2>
+                <h1>#{user.getRealname()}</h1>
                 <p><i>#{user.getNick()}@#{user.getVHost()}</i></p>
 
                 <b>Reputation</b>: #{user.getReputation()}
