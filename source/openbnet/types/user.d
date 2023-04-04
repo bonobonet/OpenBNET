@@ -7,7 +7,7 @@ public class User
 {
     // TODO: Fields
     private string name, id, hostname, ip;
-    private string realname, vhost, servername, modes;
+    private string realname, vhost, servername, modes, cloakedHost;
 
     private long clientPort, serverPort;
     private DateTime connectedSince, idleSince;
@@ -34,6 +34,7 @@ public class User
         user.servername = userBlock["servername"].str();
         user.reputation = userBlock["reputation"].integer();
         user.modes = userBlock["modes"].str();
+        user.cloakedHost = userBlock["cloakedhost"].str();
 
 
 
@@ -78,5 +79,9 @@ public class User
     public string getModes()
     {
         return modes;
+    }
+    public string getCloakedHost()
+    {
+        return cloakedHost;
     }
 }

@@ -21,3 +21,5 @@ html
                 <br>
                 <b>Hostname</b>: #{user.getHostname()}
                 <br>
+                <b>Cloaked host</b>: #{user.getCloakedHost()}
+                <br>
