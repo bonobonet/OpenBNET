@@ -19,3 +19,5 @@ html
                 <br>
                 <b>Server</b>: #{user.getServer()}
                 <br>
+                <b>Hostname</b>: #{user.getHostname()}
+                <br>
