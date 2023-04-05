@@ -23,6 +23,6 @@ html
                 br
                 - if(!(error.exception is null))
                     h3 Here's the log if it helps
-                    p #{error.exception}
+                    pre #{error.exception}
                 - else
                     h3 No further log available
