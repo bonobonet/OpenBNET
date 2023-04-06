@@ -4,7 +4,7 @@
  
 # OpenBNET
 
-Lightweight web interface and API endpoint for the `third/wwwstats` unrealircd module.
+Lightweight web interface and API endpoint for the [`JSON RPC`](https://www.unrealircd.org/docs/JSON-RPC) unrealircd module.
 
 </center>
 
