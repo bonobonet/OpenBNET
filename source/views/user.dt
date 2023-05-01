@@ -1,0 +1,25 @@
+doctype html
+html
+    include header.dt
+    body
+        center
+            include banner.dt
+
+            <hr>
+            <p><a href="/">Home</a> | <a href="/channels">Channel directory</a> | <a href="/servers">Servers</a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+            <hr>
+
+            <div>
+                <h1>#{user.getRealname()}</h1>
+                <p><i>#{user.getNick()}@#{user.getVHost()}</i></p>
+
+                <b>Reputation</b>: #{user.getReputation()}
+                <br>
+                <b>Modes</b>: #{user.getModes()}
+                <br>
+                <b>Server</b>: #{user.getServer()}
+                <br>
+                <b>Hostname</b>: #{user.getHostname()}
+                <br>
+                <b>Cloaked host</b>: #{user.getCloakedHost()}
+                <br>

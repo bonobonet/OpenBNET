@@ -1,0 +1,54 @@
+doctype html
+html
+    include header.dt
+    body
+        center
+            include banner.dt
+
+            <hr>
+            <p><a href="/">Home</a> | <a href="/channels"><b>Channel directory</b></a> | <a href="/servers">Servers</a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+            <hr>
+
+            <div>
+                <h2>Channel info: #{channelName}</h2>
+                <p><i>Detailed information on the channel</i></p>
+                <br>
+
+                table(border="1")
+                    tr
+                        th()
+                            p Channel
+                        th
+                            p Users
+                        th
+                            p Bans
+                        th
+                            p Ban exemptions
+                        th
+                            p Invite exemptions
+                        th
+                            p Members
+                    
+                    tr
+                        td
+                            p TODO
+                        td
+                            p TODO
+                        td
+                            ul
+                                - foreach(string ban; channelInfo.getBans())
+                                    li #{ban}
+                        td
+                            ul
+                                - foreach(string ban; channelInfo.getBanExemptions())
+                                    li #{ban}
+                        td
+                            ul
+                                - foreach(string ban; channelInfo.getInviteExceptions())
+                                    li #{ban}
+                        td
+                            ul
+                                - import openbnet.types.channel : MemberInfo;
+                                - foreach(MemberInfo member; channelInfo.getMembers())
+                                    li
+                                        a(href="/user?id=#{member.getID()}") #{member}

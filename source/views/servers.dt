@@ -1,0 +1,62 @@
+doctype html
+html
+    include header.dt
+    body
+        center
+            include banner.dt
+
+            <hr>
+            <p><a href="/">Home</a> | <a href="/channels">Channel directory</a> | <a href="/servers"><b>Servers</b></a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+            <hr>
+
+            <div>
+                <h2>Servers</h2>
+                <p><i>A complete list of all servers linked into the network.</i></p>
+                <br>
+
+                table(border="1")
+                    tr
+                        th()
+                            p name
+                        th
+                            p sid
+                        th
+                            p hostname
+                        th
+                            p details
+                        th
+                            p users
+                        th
+                            p info
+                        th
+                            p uplink
+                        th
+                            p boot time
+                        th
+                            p synced/ulined status
+                        th
+                            p software (version)
+                    
+                    - import openbnet.types.server;
+                    - foreach(Server curServer; servers)
+                        tr
+                            td
+                                p #{curServer.getName()}
+                            td
+                                p #{curServer.getSID()}
+                            td
+                                p #{curServer.getHostname()}
+                            td
+                                p #{curServer.getDetails()}
+                            td
+                                p #{curServer.getUserCount()}
+                            td
+                                p #{curServer.getInfo()}
+                            td
+                                p #{curServer.getUplink()}
+                            td
+                                p #{curServer.getBootTime()}
+                            td
+                                p #{curServer.getSynced()}/#{curServer.getUlined()}
+                            td
+                                p #{curServer.getSoftware()} (#{curServer.getProtocol()})

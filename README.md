@@ -4,7 +4,7 @@
  
 # OpenBNET
 
-Lightweight web interface and API endpoint for the `third/wwwstats` unrealircd module.
+Lightweight web interface and API endpoint for the [`JSON RPC`](https://www.unrealircd.org/docs/JSON-RPC) unrealircd module.
 
 </center>
 
@@ -40,56 +40,35 @@ Available at `/api`:
 
 You will need the following and can install them easily:
 
-1. `python3`
-2. `flask`
-3. `pip`
+1. `dmd`
+2. `dub`
 
-```
-apt install python3 python3-pip
-pip3 install flask
-```
+Visit the [D programming language website](https://dlang.org) for more information on how to install it.
 
-You will need to configure the `third/wwwstats` module as well, information on doing so can be found [here](http://deavmi.assigned.network/projects/bonobonet/openbnet/).
+You will need to configure the `JSON RPC` module as well, information on doing so can be found [here](https://deavmi.assigned.network/projects/bonobonet/network/config/monitoring/).
 
 ## Usage
 
 Firstly grab all the files in this repository, then:
 
 ```
-chmod +x obnet.py
+dub build
 ```
 
 The next thing to do will be to set the following environment variables:
 
-* `OPENBNET_BIND_ADDR`
-  *  The addresses to listen on (for the web server)
-* `OPENBNET_BIND_PORT`
-  * The port to listen on (for the web server)
-* `UNREAL_SOCKET_PATH`
-  * This is the path to the unrealircd `third/wwwstats` UNIX domain socket
+* `RPC_ENDPOINT`
+    * The HTTP address to the JSON RPC endpoint
 
 You can then run it like such:
 
 ```
-OPENBNET_BIND_ADDR="::" OPENBNET_BIND_PORT=8081 UNREAL_SOCKET_PATH=/tmp/openbnet.sock ./obnet.py
+RPC_ENDPOINT=https://127.0.0.1:8181 ./obnet
 ```
 
 ### Systemd-unit
 
 There is an example systemd unit file included in the repository as `openbnet.service`
-
-## Custom branding
-
-You can adjust the branding in `obnet.py` by taking a look at the following:
-
-```python
-# Network information
-NET_INFO = {
-    "networkName": "OpenBonobo",
-    "description": "Network statistics for the BonoboNET network",
-    "networkLogo": "open_bnet_banner.png",
-}
-```
 
 ## License
 

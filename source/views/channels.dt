@@ -1,0 +1,58 @@
+doctype html
+html
+	include header.dt
+	body
+		center
+			include banner.dt
+
+			<hr>
+			<p><a href="/">Home</a> | <a href="/channels"><b>Channel directory</b></a> | <a href="/servers">Servers</a> | <a href="/graphs">Graphs</a> | <a href="/raw">Raw data</a> | <a href="/api">API dump</a></p>
+			<hr>
+
+			<div>
+				<h2>Channels</h2>
+				<p><i>A complete list of all channels available on the network.</i></p>
+				<br>
+
+				table(border="1")
+					tr
+						th()
+							p Channel
+						th
+							p Users
+						th
+							p Modes
+						th
+							p Messages
+						th
+							p Created
+						th
+							p Topic
+					- import openbnet.types.channel;
+					- foreach(Channel channel; channels)
+						- import std.string : count, strip;
+						- ulong hashNumber = count(channel.getName(), "#");
+						- string channelNameWithoutHash;
+						- for(ulong i = 0; i < hashNumber; i++)
+							- channelNameWithoutHash~="%23";
+						- channelNameWithoutHash ~= strip(channel.getName(), "#");
+						
+						tr
+							td
+								a(href="/channelinfo?name=#{channelNameWithoutHash}")
+									p #{channel.getName()}
+							td
+								p #{channel.getUsers()}
+							td
+								p #{channel.getModes()}
+							td
+								// p #{channel.getCreationTime().toString()}
+							td
+								// - channel.getMessages()();
+								p #{channel.getCreationTime().toString()}
+							td
+								p #{channel.getTopic()}
+						
+
+
+		

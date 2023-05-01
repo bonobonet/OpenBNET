@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+libsnooze.so
+libsnooze.dylib
+libsnooze.dll
+libsnooze.a
+libsnooze.lib
+openbnet-test-*
+*.exe
+*.pdb
+*.o
+*.obj
+*.lst
+dub.selections.json
+liblibsnooze.a
